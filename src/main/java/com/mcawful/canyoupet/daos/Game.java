@@ -32,6 +32,11 @@ public class Game {
 	private int id;
 
 	/**
+	 * The {@link String} titleURL of the {@link Game} object.
+	 */
+	private String titleURL;
+
+	/**
 	 * The {@link String} title of the {@link Game} object.
 	 */
 	private String title;
