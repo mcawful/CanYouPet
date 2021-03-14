@@ -20,7 +20,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DAO entity representing the Game object.
+ * The DOA entity that represents the Animal object.
  * 
  * @author Michael McAuliffe
  *
@@ -29,35 +29,28 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-public class Game {
+public class Animal {
 
 	/**
-	 * The ID of the {@link Game} object.
+	 * The ID of the {@link Animal} object.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 
 	/**
-	 * The {@link String} titleURI of the {@link Game} object.
+	 * The {@link String} name of the {@link Animal} object.
 	 */
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	@NonNull
-	private String titleURI;
+	private String name;
 
 	/**
-	 * The {@link String} title of the {@link Game} object.
-	 */
-	@Column(nullable = false, unique = true)
-	@NonNull
-	private String title;
-
-	/**
-	 * The {@link List of {@link Animal} objects in the {@link Game} object.
+	 * The {@link List} of {@link Action} objects in the {@link Animal} object.
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
 	@NonNull
-	private List<Animal> animals;
+	private List<Action> actions;
 
 }
