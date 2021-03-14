@@ -5,23 +5,34 @@ package com.mcawful.canyoupet.repos;
 
 import java.util.Optional;
 
-import org.springframework.data.jpa.repository.JpaRepository;
+import javax.persistence.OneToMany;
 
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.stereotype.Repository;
+
+import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Game;
 
 /**
- * Repo layer for persisting {@link Game} objects
+ * Repository layer for {@link Game} objects.
+ * <p>
+ * Note that a {@link Game} object contains a {@link OneToMany} relationship
+ * with a {@link List} of {@link Animal} objects. An {@link Animal} object in
+ * turn also contains a {@link OneToMany} relationship with a {@link List} of
+ * {@link Action} objects.
  * 
  * @author Michael McAuliffe
  *
  */
+@Repository
 public interface GameRepo extends JpaRepository<Game, Integer> {
 
 	/**
-	 * Finds a {@link Game object based off of its {@link String} TitleURL field.
+	 * Finds a {@link Game} object based off of its <code>titleURL</code>
+	 * {@link String} field.
 	 * 
-	 * @param titleURL the {@link String} titleURL of the {@link Game} object to
-	 *                 find
+	 * @param titleURL the <code>titleURL</code> {@link String} of the {@link Game}
+	 *                 object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
 	public Optional<Game> findByTitleURL(String titleURL);
