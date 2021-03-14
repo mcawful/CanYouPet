@@ -40,7 +40,7 @@ class GameRepoTest {
 
 	private Animal animal;
 
-	private String titleURL;
+	private String titleURI;
 
 	/**
 	 * @throws java.lang.Exception
@@ -67,11 +67,11 @@ class GameRepoTest {
 	@BeforeEach
 	void setUp() throws Exception {
 
-		this.titleURL = "test_game";
+		this.titleURI = "test_game";
 
-		this.action = new Action(0, "pet", "http://test.url", true);
-		this.animal = new Animal(0, "dog", Arrays.asList(this.action));
-		this.game = new Game(0, this.titleURL, "Test Game", Arrays.asList(this.animal));
+		this.action = new Action("pet", "http://test.url", true);
+		this.animal = new Animal("dog", Arrays.asList(this.action));
+		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
 
 		this.gameRepo.save(this.game);
 	}
@@ -100,30 +100,30 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Tests the {@link GameRepo} <code>findByTitleURL</code> method when passed a
-	 * <code>titleURL</code> {@link String} that matches a {@link Game} object in
+	 * Tests the {@link GameRepo} <code>findByTitleURI</code> method when passed a
+	 * <code>titleURI</code> {@link String} that matches a {@link Game} object in
 	 * the repository. Test asserts that the {@link Game} object from the returned
 	 * {@link Optional} equals what is expected and that the {@link Optional} does
 	 * not throw a {@link NoSuchElementException}.
 	 */
 	@Test
-	void findByTitleURLTest_GameExists() {
+	void findByTitleURITest_GameExists() {
 
-		Game returned = this.gameRepo.findByTitleURL(this.titleURL).orElseThrow(NoSuchElementException::new);
+		Game returned = this.gameRepo.findByTitleURI(this.titleURI).orElseThrow(NoSuchElementException::new);
 
 		assertEquals(this.game.toString(), returned.toString());
 	}
 
 	/**
-	 * Tests the {@link GameRepo} <code>findByTitleURL</code> method when passed a
-	 * <code>titleURL</code> {@link String} that does not match a {@link Game}
+	 * Tests the {@link GameRepo} <code>findByTitleURI</code> method when passed a
+	 * <code>titleURI</code> {@link String} that does not match a {@link Game}
 	 * object in the repository. Test asserts that a {@link NoSuchElementException}
 	 * is thrown from the returned {@link Optional}.
 	 */
 	@Test
-	void findByTitleURLTest_GameDoesNotExist() {
+	void findByTitleURITest_GameDoesNotExist() {
 
-		Optional<Game> returned = this.gameRepo.findByTitleURL("invalid");
+		Optional<Game> returned = this.gameRepo.findByTitleURI("invalid");
 
 		assertThrows(NoSuchElementException.class, () -> returned.orElseThrow(NoSuchElementException::new));
 
