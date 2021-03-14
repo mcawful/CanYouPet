@@ -3,6 +3,7 @@
  */
 package com.mcawful.canyoupet.repos;
 
+import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.Arrays;
@@ -18,7 +19,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mcawful.canyoupet.daos.Game;
-
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 
@@ -85,7 +85,18 @@ class GameRepoTest {
 	@AfterEach
 	void tearDown() throws Exception {
 
-		//this.gameRepo.delete(this.game);
+		this.gameRepo.delete(this.game);
+	}
+
+	/**
+	 * Test asserts that the {@link GameRepo} has been instantiated.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void contextLoads() throws Exception {
+
+		assertThat(this.gameRepo).isNotNull();
 	}
 
 	/**
