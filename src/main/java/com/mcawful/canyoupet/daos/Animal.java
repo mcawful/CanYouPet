@@ -19,7 +19,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 /**
- * The DAO entity representing the Game object.
+ * The DOA entity that represents the Animal object.
  * 
  * @author Michael McAuliffe
  *
@@ -28,32 +28,26 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-public class Game {
+public class Animal {
 
 	/**
-	 * The ID of the {@link Game} object.
+	 * The ID of the {@link Animal} object.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-
+	
 	/**
-	 * The {@link String} titleURL of the {@link Game} object.
+	 * The {@link String} name of the {@link Animal} object.
 	 */
-	@Column(nullable = false, unique = true)
-	private String titleURL;
+	@Column(nullable = false)
+	private String name;
 
 	/**
-	 * The {@link String} title of the {@link Game} object.
-	 */
-	@Column(nullable = false, unique = true)
-	private String title;
-
-	/**
-	 * The {@link List of {@link Animal} objects in the {@link Game} object.
+	 * The {@link List} of {@link Action} objects in the {@link Animal} object.
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
-	private List<Animal> animals;
+	private List<Action> actions;
 
 }
