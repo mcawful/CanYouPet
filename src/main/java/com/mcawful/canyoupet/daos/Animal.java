@@ -14,9 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * The DOA entity that represents the Animal object.
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Animal {
 
@@ -36,11 +37,12 @@ public class Animal {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	/**
 	 * The {@link String} name of the {@link Animal} object.
 	 */
 	@Column(nullable = false)
+	@NonNull
 	private String name;
 
 	/**
@@ -48,6 +50,7 @@ public class Animal {
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
+	@NonNull
 	private List<Action> actions;
 
 }

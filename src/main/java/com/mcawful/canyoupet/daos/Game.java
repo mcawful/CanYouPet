@@ -14,9 +14,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * The DAO entity representing the Game object.
@@ -26,7 +27,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Game {
 
@@ -38,15 +39,17 @@ public class Game {
 	private int id;
 
 	/**
-	 * The {@link String} titleURL of the {@link Game} object.
+	 * The {@link String} titleURI of the {@link Game} object.
 	 */
 	@Column(nullable = false, unique = true)
-	private String titleURL;
+	@NonNull
+	private String titleURI;
 
 	/**
 	 * The {@link String} title of the {@link Game} object.
 	 */
 	@Column(nullable = false, unique = true)
+	@NonNull
 	private String title;
 
 	/**
@@ -54,6 +57,7 @@ public class Game {
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
+	@NonNull
 	private List<Animal> animals;
 
 }

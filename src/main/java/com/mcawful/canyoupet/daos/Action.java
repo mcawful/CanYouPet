@@ -9,9 +9,10 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
 
 /**
  * The DOA entity that represents the Action object.
@@ -21,7 +22,7 @@ import lombok.NoArgsConstructor;
  */
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
+@RequiredArgsConstructor
 @Entity
 public class Action {
 
@@ -31,23 +32,26 @@ public class Action {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
-	
+
 	/**
 	 * The {@link String} name of the {@link Action} object.
 	 */
 	@Column(nullable = false)
+	@NonNull
 	private String name;
 
 	/**
 	 * The {@link String} source URL of the {@link Action} object.
 	 */
 	@Column(nullable = false)
+	@NonNull
 	private String sourceURL;
 
 	/**
 	 * Indicates if the action of the {@link Action} object can be done.
 	 */
 	@Column(nullable = false)
-	private boolean canYou;
+	@NonNull
+	private Boolean canYou;
 
 }
