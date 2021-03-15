@@ -5,12 +5,15 @@ package com.mcawful.canyoupet.services;
 
 import javax.persistence.EntityNotFoundException;
 
+import org.springframework.stereotype.Service;
+
 import com.mcawful.canyoupet.daos.Game;
 
 /**
  * @author Michael McAuliffe
  *
  */
+@Service
 public class GameServiceImpl implements GameService {
 
 	@Override
