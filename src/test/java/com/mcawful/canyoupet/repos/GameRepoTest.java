@@ -36,9 +36,9 @@ class GameRepoTest {
 
 	private Game game;
 
-	private Action action;
-
 	private Animal animal;
+
+	private Action action;
 
 	private String titleURI;
 
