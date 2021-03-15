@@ -8,7 +8,7 @@ import javax.persistence.EntityNotFoundException;
 import com.mcawful.canyoupet.daos.Game;
 
 /**
- * A service to handle requests for {@link Game} objects.
+ * A service interface to handle requests for {@link Game} objects.
  * 
  * @author Michael McAuliffe
  *
