@@ -127,7 +127,7 @@ class GameServiceImplTest {
 
 		when(this.gameRepo.findByTitleURI("invalid")).thenThrow(EntityNotFoundException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService.retrieveGameByTitleURI(this.titleURI));
+		assertThrows(EntityNotFoundException.class, () -> this.gameService.retrieveGameByTitleURI("invalid"));
 
 		verify(this.gameRepo).findByTitleURI("invalid");
 	}
