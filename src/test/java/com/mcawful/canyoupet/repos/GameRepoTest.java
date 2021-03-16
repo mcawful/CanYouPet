@@ -69,7 +69,7 @@ class GameRepoTest {
 
 		this.titleURI = "test_game";
 
-		this.action = new Action("pet", "http://test.url", true);
+		this.action = new Action("pet", true, "http://test.url");
 		this.animal = new Animal("dog", Arrays.asList(this.action));
 		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
 
