@@ -25,6 +25,11 @@ public class ActionDto {
 	 * The {@code canYou} {@link Boolean} of the {@link ActionDto} object.
 	 */
 	private Boolean canYou;
+	
+	/**
+	 * The {@code sourceURL} {@link String} of the {@link ActionDto} object.
+	 */
+	private String sourceURL;
 
 	/**
 	 * Constructs an {@link ActionDto} object from an {@link Action} object.
@@ -34,5 +39,6 @@ public class ActionDto {
 	public ActionDto(Action action) {
 		this.actionName = action.getName();
 		this.canYou = action.getCanYou();
+		this.sourceURL = action.getSourceURL();
 	}
 }
