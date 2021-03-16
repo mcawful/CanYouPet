@@ -9,6 +9,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.EntityNotFoundException;
@@ -103,17 +104,19 @@ class GameServiceImplTest {
 	 * {@code titleURI} {@link String} that matches a {@link Game} object. Test
 	 * verifies that the {@link GameRepo} {@code findByTitleURI} method was called
 	 * and asserts that the returned {@link Game} object matches what is expected.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void retrieveGameByTitleURITest_GameExists() {
+	void readGameByTitleURITest_GameExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURI(this.titleURI)).thenReturn(Optional.of(game));
 
-		Game returned = this.gameService.retrieveGameByTitleURI(this.titleURI);
+		Game returned = this.gameService.readGameByTitleURI(this.titleURI);
 
 		verify(this.gameRepo).findByTitleURI(this.titleURI);
 
-		assertEquals(game.toString(), returned.toString());
+		assertEquals(game, returned);
 	}
 
 	/**
@@ -121,15 +124,35 @@ class GameServiceImplTest {
 	 * {@code titleURI} {@link String} that does not match a {@link Game} object.
 	 * Test verifies that the {@link GameRepo} {@code findByTitleURI} method was
 	 * called and asserts that a {@link EntityNotFoundException} was thrown.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void retrieveGameByTitleURITest_GameDoesNotExists() {
+	void readGameByTitleURITest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURI("invalid")).thenThrow(EntityNotFoundException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService.retrieveGameByTitleURI("invalid"));
+		assertThrows(EntityNotFoundException.class, () -> this.gameService.readGameByTitleURI("invalid"));
 
 		verify(this.gameRepo).findByTitleURI("invalid");
 	}
 
+	/**
+	 * Tests the {@link GameServiceImpl} {@code readAllGames} method. Test verifies
+	 * that the {@link GameRepo} {@code findAll} method was called and asserts that
+	 * the {@link List} of {@link Game} objects matches what is expected.
+	 * 
+	 * @throws Exception
+	 */
+	@Test
+	void readAllGamesTest_Success() throws Exception {
+
+		when(this.gameRepo.findAll()).thenReturn(Arrays.asList(game));
+
+		List<Game> games = this.gameService.readAllGames();
+
+		verify(this.gameRepo).findAll();
+
+		assertEquals(Arrays.asList(game), games);
+	}
 }

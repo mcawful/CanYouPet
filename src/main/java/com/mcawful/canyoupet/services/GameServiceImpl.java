@@ -3,6 +3,8 @@
  */
 package com.mcawful.canyoupet.services;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,7 +38,7 @@ public class GameServiceImpl implements GameService {
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} by
-	 * making a call to the appropriate repository.
+	 * making a call to the {@link GameRepo} repository.
 	 * 
 	 * @param titleURI the {@code titleURI} {@link String} field of the {@link Game}
 	 *                 object
@@ -45,9 +47,21 @@ public class GameServiceImpl implements GameService {
 	 *                                 the repository
 	 */
 	@Override
-	public Game retrieveGameByTitleURI(String titleURI) throws EntityNotFoundException {
+	public Game readGameByTitleURI(String titleURI) throws EntityNotFoundException {
 
 		return this.gameRepo.findByTitleURI(titleURI).orElseThrow(EntityNotFoundException::new);
+	}
+
+	/**
+	 * Retrieves a {@link List} of all {@link Game} objects by making a call to the
+	 * {@link GameRepo} repository.
+	 * 
+	 * @return a {@link List} of {@link Game} objects
+	 */
+	@Override
+	public List<Game> readAllGames() {
+		
+		return this.gameRepo.findAll();
 	}
 
 }
