@@ -100,14 +100,16 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Tests the {@link GameRepo} <code>findByTitleURI</code> method when passed a
-	 * <code>titleURI</code> {@link String} that matches a {@link Game} object in
-	 * the repository. Test asserts that the {@link Game} object from the returned
+	 * Tests the {@link GameRepo} {@code findByTitleURI} method when passed a
+	 * {@code titleURI} {@link String} that matches a {@link Game} object in the
+	 * repository. Test asserts that the {@link Game} object from the returned
 	 * {@link Optional} equals what is expected and that the {@link Optional} does
 	 * not throw a {@link NoSuchElementException}.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void findByTitleURITest_GameExists() {
+	void findByTitleURITest_GameExists() throws Exception {
 
 		Game returned = this.gameRepo.findByTitleURI(this.titleURI).orElseThrow(NoSuchElementException::new);
 
@@ -115,13 +117,15 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Tests the {@link GameRepo} <code>findByTitleURI</code> method when passed a
-	 * <code>titleURI</code> {@link String} that does not match a {@link Game}
-	 * object in the repository. Test asserts that a {@link NoSuchElementException}
-	 * is thrown from the returned {@link Optional}.
+	 * Tests the {@link GameRepo} {@code findByTitleURI} method when passed a
+	 * {@code titleURI} {@link String} that does not match a {@link Game} object in
+	 * the repository. Test asserts that a {@link NoSuchElementException} is thrown
+	 * from the returned {@link Optional}.
+	 * 
+	 * @throws Exception
 	 */
 	@Test
-	void findByTitleURITest_GameDoesNotExist() {
+	void findByTitleURITest_GameDoesNotExist() throws Exception {
 
 		Optional<Game> returned = this.gameRepo.findByTitleURI("invalid");
 

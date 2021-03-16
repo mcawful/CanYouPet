@@ -3,6 +3,8 @@
  */
 package com.mcawful.canyoupet.services;
 
+import java.util.List;
+
 import javax.persistence.EntityNotFoundException;
 
 import com.mcawful.canyoupet.daos.Game;
@@ -25,6 +27,13 @@ public interface GameService {
 	 * @throws EntityNotFoundException when a {@link Game} object cannot be found in
 	 *                                 the repository
 	 */
-	public Game retrieveGameByTitleURI(String titleURI) throws EntityNotFoundException;
+	public Game readGameByTitleURI(String titleURI) throws EntityNotFoundException;
 
+	/**
+	 * Retrieves a {@link List} of all {@link Game} objects by making a call to the
+	 * appropriate repository.
+	 * 
+	 * @return a {@link List} of {@link Game} objects
+	 */
+	public List<Game> readAllGames();
 }
