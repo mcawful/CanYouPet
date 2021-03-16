@@ -20,6 +20,10 @@ import com.mcawful.canyoupet.dtos.GameAnimalActionDto;
 @RequestMapping("/api")
 public class GameController {
 
+	/**
+	 * 
+	 * @return
+	 */
 	@GetMapping
 	public GameAnimalActionDto[] getAllGameAnimalActions() {
 		
