@@ -149,10 +149,10 @@ class GameServiceImplTest {
 
 		when(this.gameRepo.findAll()).thenReturn(Arrays.asList(game));
 
-		List<Game> games = this.gameService.readAllGames();
+		List<Game> returnedGames = this.gameService.readAllGames();
 
 		verify(this.gameRepo).findAll();
 
-		assertEquals(Arrays.asList(game), games);
+		assertEquals(Arrays.asList(game), returnedGames);
 	}
 }
