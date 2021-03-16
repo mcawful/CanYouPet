@@ -28,10 +28,10 @@ import com.mcawful.canyoupet.daos.Game;
 public interface GameRepo extends JpaRepository<Game, Integer> {
 
 	/**
-	 * Finds a {@link Game} object based off of its <code>titleURI</code>
+	 * Finds a {@link Game} object based off of its {@code titleURI}
 	 * {@link String} field.
 	 * 
-	 * @param titleURI the <code>titleURI</code> {@link String} of the {@link Game}
+	 * @param titleURI the {@code titleURI} {@link String} of the {@link Game}
 	 *                 object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
