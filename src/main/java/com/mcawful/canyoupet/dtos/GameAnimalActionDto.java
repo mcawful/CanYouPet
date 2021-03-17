@@ -3,6 +3,9 @@
  */
 package com.mcawful.canyoupet.dtos;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Game;
 
@@ -26,11 +29,11 @@ public class GameAnimalActionDto {
 	private String gameTitle;
 
 	/**
-	 * The array of {@link AnimalActionDto} objects of the
+	 * The {@link List} of {@link AnimalActionDto} objects of the
 	 * {@link GameAnimalActionDto} object.
 	 */
 	@NonFinal
-	private AnimalActionDto[] animalActions;
+	private List<AnimalActionDto> animalActions;
 
 	/**
 	 * Constructs a {@link GameAnimalActionDto} from a {@link Game} object.
@@ -40,6 +43,7 @@ public class GameAnimalActionDto {
 	public GameAnimalActionDto(Game game) {
 
 		this.gameTitle = game.getTitle();
-		this.animalActions = game.getAnimals().toArray(animalActions);
+		this.animalActions = game.getAnimals().stream().map(animalAction -> new AnimalActionDto(animalAction))
+				.collect(Collectors.toList());
 	}
 }
