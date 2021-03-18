@@ -106,9 +106,11 @@ class GameRepoTest {
 	/**
 	 * Tests the {@link GameRepo} {@code findByTitleURI} method when passed a
 	 * {@code titleURI} {@link String} that matches a {@link Game} object in the
-	 * repository. Test asserts that the {@link Game} object from the returned
-	 * {@link Optional} equals what is expected and that the {@link Optional} does
-	 * not throw a {@link NoSuchElementException}.
+	 * repository.
+	 * <p>
+	 * Test asserts that the {@link Game} object from the returned {@link Optional}
+	 * equals what is expected and that the {@link Optional} does not throw a
+	 * {@link NoSuchElementException}.
 	 * 
 	 * @throws Exception
 	 */
@@ -130,8 +132,10 @@ class GameRepoTest {
 	/**
 	 * Tests the {@link GameRepo} {@code findByTitleURI} method when passed a
 	 * {@code titleURI} {@link String} that does not match a {@link Game} object in
-	 * the repository. Test asserts that a {@link NoSuchElementException} is thrown
-	 * from the returned {@link Optional}.
+	 * the repository.
+	 * <p>
+	 * Test asserts that a {@link NoSuchElementException} is thrown from the
+	 * returned {@link Optional}.
 	 * 
 	 * @throws Exception
 	 */
@@ -148,9 +152,11 @@ class GameRepoTest {
 	 * Tests the {@link GameRepo} {@code findByTitleURIAndAnimals_Name} method when
 	 * passed a {@code titleURI} {@link String} that matches a {@link Game} object
 	 * and a {@code name} {@link String} that matches the related {@link Animal}
-	 * object in the repository. Test asserts that the {@link Game} object from the
-	 * returned {@link Optional} equals what is expected and that the
-	 * {@link Optional} does not throw a {@link NoSuchElementException}.
+	 * object in the repository.
+	 * <p>
+	 * Test asserts that the {@link Game} object from the returned {@link Optional}
+	 * equals what is expected and that the {@link Optional} does not throw a
+	 * {@link NoSuchElementException}.
 	 * 
 	 * @throws Exception
 	 */
@@ -172,9 +178,11 @@ class GameRepoTest {
 
 	/**
 	 * Tests the {@link GameRepo} {@code findByTitleURIAndAnimals_Name} method when
-	 * passed a {@code name} {@link String} that does not match a {@link Animal}
-	 * object in the related {@link Game} object the repository. Test asserts that a
-	 * {@link NoSuchElementException} is thrown from the returned {@link Optional}.
+	 * passed a {@code name} {@link String} that does not match an {@link Animal}
+	 * object in the related {@link Game} object in the repository.
+	 * <p>
+	 * Test asserts that a {@link NoSuchElementException} is thrown from the
+	 * returned {@link Optional}.
 	 * 
 	 * @throws Exception
 	 */
@@ -192,8 +200,9 @@ class GameRepoTest {
 	 * passed a {@code titleURI} {@link String} that matches a {@link Game} object
 	 * and a {@code name} {@link String} that matches the related {@link Animal}
 	 * object and a {@code name} {@link String} that matches the related
-	 * {@link Animal} object's related {@link Action} object in the repository. Test
-	 * asserts that the {@link Game} object from the returned {@link Optional}
+	 * {@link Animal} object's related {@link Action} object in the repository.
+	 * <p>
+	 * Test asserts that the {@link Game} object from the returned {@link Optional}
 	 * equals what is expected and that the {@link Optional} does not throw a
 	 * {@link NoSuchElementException}.
 	 * 
@@ -216,6 +225,14 @@ class GameRepoTest {
 	}
 
 	/**
+	 * Tests the {@link GameRepo}
+	 * {@code findByTitleURIAndAnimals_NameAndAnimals_Actions_Name} method when
+	 * passed a {@code name} {@link String} that does not match an {@link Action}
+	 * object in the related {@link Animal} object in the related {@link Game}
+	 * object in the repository.
+	 * <p>
+	 * Test asserts that a {@link NoSuchElementException} is thrown from the
+	 * returned {@link Optional}.
 	 * 
 	 * @throws Exception
 	 */
