@@ -3,6 +3,9 @@
  */
 package com.mcawful.canyoupet.controllers;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,9 +28,9 @@ public class GameController {
 	 * @return
 	 */
 	@GetMapping
-	public GameAnimalActionDto[] getAllGameAnimalActions() {
+	public List<GameAnimalActionDto> getAllGameAnimalActions() {
 		
-		return new GameAnimalActionDto[0];
+		return new ArrayList<>();
 	}
 	
 	/**
