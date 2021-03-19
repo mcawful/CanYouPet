@@ -27,7 +27,7 @@ public class GlobalControllerExceptionHandler {
 	 * {@link DataIntegrityViolationException} occurs. Response code is 409.
 	 */
 	@ResponseStatus(value = HttpStatus.CONFLICT, reason = "Could not add/update resource due to constraint violation.") // 409
-	@ExceptionHandler(DataIntegrityViolationException.class)
+	@ExceptionHandler(value = DataIntegrityViolationException.class)
 	public void handleConflict() {
 		// Method intentionally left empty
 	}
@@ -37,7 +37,7 @@ public class GlobalControllerExceptionHandler {
 	 * occurs. Response code is 404.
 	 */
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Requested resource was not found.") // 404
-	@ExceptionHandler({ NoSuchElementException.class, EmptyResultDataAccessException.class })
+	@ExceptionHandler(value = { NoSuchElementException.class, EmptyResultDataAccessException.class })
 	public void handleNotFound() {
 		// Method intentionally left empty
 	}
@@ -47,7 +47,7 @@ public class GlobalControllerExceptionHandler {
 	 * {@link IllegalArgumentException} occurs. Response code is 400.
 	 */
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST, reason = "An illegal request was made.") // 400
-	@ExceptionHandler(IllegalArgumentException.class)
+	@ExceptionHandler(value = IllegalArgumentException.class)
 	public void handleBadRequest() {
 		// Method intentionally left empty
 	}
