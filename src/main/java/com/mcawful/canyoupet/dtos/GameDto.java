@@ -23,17 +23,20 @@ import lombok.experimental.NonFinal;
 public class GameDto {
 
 	/**
-	 * The {@code gameTitle} {@link String} of the {@link GameDto}
-	 * object.
+	 * The {@code gameTitle} {@link String} of the {@link GameDto} object.
 	 */
 	private String gameTitle;
 
 	/**
-	 * The {@link List} of {@link AnimalDto} objects of the
-	 * {@link GameDto} object.
+	 * The {@code gameURI} {@link String} of the {@link GameDto} object.
+	 */
+	private String gameURI;
+
+	/**
+	 * The {@link List} of {@link AnimalDto} objects of the {@link GameDto} object.
 	 */
 	@NonFinal
-	private List<AnimalDto> animalActions;
+	private List<AnimalDto> animals;
 
 	/**
 	 * Constructs a {@link GameDto} from a {@link Game} object.
@@ -43,7 +46,8 @@ public class GameDto {
 	public GameDto(Game game) {
 
 		this.gameTitle = game.getTitle();
-		this.animalActions = game.getAnimals().stream().map(animalAction -> new AnimalDto(animalAction))
+		this.gameURI = game.getTitleURI();
+		this.animals = game.getAnimals().stream().map(animalAction -> new AnimalDto(animalAction))
 				.collect(Collectors.toList());
 	}
 }
