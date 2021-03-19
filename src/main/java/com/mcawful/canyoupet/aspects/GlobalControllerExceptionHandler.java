@@ -37,7 +37,7 @@ public class GlobalControllerExceptionHandler {
 	 * occurs. Response code is 404.
 	 */
 	@ResponseStatus(value = HttpStatus.NOT_FOUND, reason = "Requested resource was not found.") // 404
-	@ExceptionHandler({NoSuchElementException.class, EmptyResultDataAccessException.class})
+	@ExceptionHandler({ NoSuchElementException.class, EmptyResultDataAccessException.class })
 	public void handleNotFound() {
 		// Method intentionally left empty
 	}
