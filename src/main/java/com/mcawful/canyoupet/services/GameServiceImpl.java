@@ -45,7 +45,7 @@ public class GameServiceImpl implements GameService {
 	 * @return a {@link List} of {@link Game} objects
 	 */
 	@Override
-	public List<Game> readAllGames() {
+	public List<Game> getAllGames() {
 
 		return this.gameRepo.findAll();
 	}
@@ -61,7 +61,7 @@ public class GameServiceImpl implements GameService {
 	 *                                 found in the repository
 	 */
 	@Override
-	public Game readGameByTitleURI(String titleURI) throws EntityNotFoundException {
+	public Game getGame(String titleURI) throws EntityNotFoundException {
 
 		return this.gameRepo.findByTitleURI(titleURI).orElseThrow(EntityNotFoundException::new);
 	}
@@ -80,8 +80,7 @@ public class GameServiceImpl implements GameService {
 	 *                                 found in the repository
 	 */
 	@Override
-	public Animal readAnimalByGameTitleURIAndAnimalName(String titleURI, String animalName)
-			throws EntityNotFoundException {
+	public Animal getAnimal(String titleURI, String animalName) throws EntityNotFoundException {
 
 		Game game = this.gameRepo.findByTitleURIAndAnimals_Name(titleURI, animalName)
 				.orElseThrow(EntityNotFoundException::new);
@@ -108,8 +107,7 @@ public class GameServiceImpl implements GameService {
 	 *                                 found in the repository
 	 */
 	@Override
-	public Action readActionByGameTitleURIAndAnimalNameAndActionName(String titleURI, String animalName,
-			String actionName) throws EntityNotFoundException {
+	public Action getAction(String titleURI, String animalName, String actionName) throws EntityNotFoundException {
 
 		Game game = this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(titleURI, animalName, actionName)
 				.orElseThrow(EntityNotFoundException::new);

@@ -25,7 +25,7 @@ public interface GameService {
 	 * 
 	 * @return a {@link List} of {@link Game} objects
 	 */
-	public List<Game> readAllGames();
+	public List<Game> getAllGames();
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} by
@@ -37,7 +37,7 @@ public interface GameService {
 	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
 	 *                                 found in the repository
 	 */
-	public Game readGameByTitleURI(String titleURI) throws EntityNotFoundException;
+	public Game getGame(String titleURI) throws EntityNotFoundException;
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} and
@@ -52,8 +52,7 @@ public interface GameService {
 	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
 	 *                                 found in the repository
 	 */
-	public Animal readAnimalByGameTitleURIAndAnimalName(String titleURI, String animalName)
-			throws EntityNotFoundException;
+	public Animal getAnimal(String titleURI, String animalName) throws EntityNotFoundException;
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} and
@@ -72,6 +71,5 @@ public interface GameService {
 	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
 	 *                                 found in the repository
 	 */
-	public Action readActionByGameTitleURIAndAnimalNameAndActionName(String titleURI, String animalName,
-			String actionName) throws EntityNotFoundException;
+	public Action getAction(String titleURI, String animalName, String actionName) throws EntityNotFoundException;
 }

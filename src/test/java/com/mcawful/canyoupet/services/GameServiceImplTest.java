@@ -29,6 +29,8 @@ import com.mcawful.canyoupet.daos.Game;
 import com.mcawful.canyoupet.repos.GameRepo;
 
 /**
+ * Tests for the {@link GameServiceImpl} methods.
+ * 
  * @author Michael McAuliffe
  *
  */
@@ -103,7 +105,7 @@ class GameServiceImplTest {
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl} {@code readAllGames} method.
+	 * Tests the {@link GameServiceImpl} {@code getAllGames} method.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo} {@code findAll} method was
 	 * called and asserts that the {@link List} of {@link Game} objects matches what
@@ -112,11 +114,11 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readAllGamesTest_Success() throws Exception {
+	void getAllGamesTest_Success() throws Exception {
 
 		when(this.gameRepo.findAll()).thenReturn(Arrays.asList(game));
 
-		List<Game> returnedGames = this.gameService.readAllGames();
+		List<Game> returnedGames = this.gameService.getAllGames();
 
 		verify(this.gameRepo).findAll();
 
@@ -124,7 +126,7 @@ class GameServiceImplTest {
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl} {@code readGameByTitleURI} when passed a
+	 * Tests the {@link GameServiceImpl} {@code getGame} method when passed a
 	 * {@code titleURI} {@link String} that matches a {@link Game} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo} {@code findByTitleURI} method
@@ -134,11 +136,11 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readGameByTitleURITest_GameExists() throws Exception {
+	void getGameTest_GameExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURI(this.titleURI)).thenReturn(Optional.of(game));
 
-		Game returned = this.gameService.readGameByTitleURI(this.titleURI);
+		Game returned = this.gameService.getGame(this.titleURI);
 
 		verify(this.gameRepo).findByTitleURI(this.titleURI);
 
@@ -146,7 +148,7 @@ class GameServiceImplTest {
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl} {@code readGameByTitleURI} when passed a
+	 * Tests the {@link GameServiceImpl} {@code getGame} method when passed a
 	 * {@code titleURI} {@link String} that does not match a {@link Game} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo} {@code findByTitleURI} method
@@ -155,20 +157,19 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readGameByTitleURITest_GameDoesNotExists() throws Exception {
+	void getGameTest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURI("invalid")).thenThrow(EntityNotFoundException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService.readGameByTitleURI("invalid"));
+		assertThrows(EntityNotFoundException.class, () -> this.gameService.getGame("invalid"));
 
 		verify(this.gameRepo).findByTitleURI("invalid");
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl}
-	 * {@code readAnimalByGameTitleURIAndAnimalName} when passed a {@code titleURI}
-	 * {@link String} that matches a {@link Game} object and a {@code name}
-	 * {@link String} that matches a related {@link Animal} object.
+	 * Tests the {@link GameServiceImpl} {@code getAnimal} method when passed a
+	 * {@code titleURI} {@link String} that matches a {@link Game} object and a
+	 * {@code name} {@link String} that matches a related {@link Animal} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_Name} method was called and asserts that the
@@ -177,11 +178,11 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readAnimalByGameTitleURIAndAnimalNameTest_GameExists() throws Exception {
+	void getAnimalTest_GameExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, this.animalName)).thenReturn(Optional.of(game));
 
-		Animal returned = this.gameService.readAnimalByGameTitleURIAndAnimalName(this.titleURI, this.animalName);
+		Animal returned = this.gameService.getAnimal(this.titleURI, this.animalName);
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_Name(this.titleURI, this.animalName);
 
@@ -189,10 +190,9 @@ class GameServiceImplTest {
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl}
-	 * {@code readAnimalByGameTitleURIAndAnimalName} when passed a {@code name}
-	 * {@link String} that does not match a related {@link Animal} object to the
-	 * matching {@link Game} object.
+	 * Tests the {@link GameServiceImpl} {@code getAnimal} method when passed a
+	 * {@code name} {@link String} that does not match a related {@link Animal}
+	 * object to the matching {@link Game} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_Name} method was called and asserts that a
@@ -201,23 +201,21 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readAnimalByGameTitleURIAndAnimalNameTest_GameDoesNotExists() throws Exception {
+	void getAnimalTest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, "invalid"))
 				.thenThrow(EntityNotFoundException.class);
 
-		assertThrows(EntityNotFoundException.class,
-				() -> this.gameService.readAnimalByGameTitleURIAndAnimalName(this.titleURI, "invalid"));
+		assertThrows(EntityNotFoundException.class, () -> this.gameService.getAnimal(this.titleURI, "invalid"));
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_Name(this.titleURI, "invalid");
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl}
-	 * {@code readAnimalByGameTitleURIAndAnimalName} when passed a {@code titleURI}
-	 * {@link String} that matches a {@link Game} object and a {@code name}
-	 * {@link String} that matches a related {@link Animal} object and a
-	 * {@code name} {@link String} that matches a related {@link Action} object to
+	 * Tests the {@link GameServiceImpl} {@code getAction} method when passed a
+	 * {@code titleURI} {@link String} that matches a {@link Game} object and a
+	 * {@code name} {@link String} that matches a related {@link Animal} object and
+	 * a {@code name} {@link String} that matches a related {@link Action} object to
 	 * the related {@link Animal} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo}
@@ -228,13 +226,12 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readActionByGameTitleURIAndAnimalNameAndActionNameTest_GameExists() throws Exception {
+	void getActionTest_GameExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
 				this.actionName)).thenReturn(Optional.of(game));
 
-		Action returned = this.gameService.readActionByGameTitleURIAndAnimalNameAndActionName(this.titleURI,
-				this.animalName, this.actionName);
+		Action returned = this.gameService.getAction(this.titleURI, this.animalName, this.actionName);
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
 				this.actionName);
@@ -243,8 +240,7 @@ class GameServiceImplTest {
 	}
 
 	/**
-	 * Tests the {@link GameServiceImpl}
-	 * {@code readActionByGameTitleURIAndAnimalNameAndActionName} when passed a
+	 * Tests the {@link GameServiceImpl} {@code getAction} method when passed a
 	 * {@code name} {@link String} that does not match a related {@link Action}
 	 * object to the matching {@link Animal} object to the matching {@link Game}
 	 * object.
@@ -256,13 +252,13 @@ class GameServiceImplTest {
 	 * @throws Exception
 	 */
 	@Test
-	void readActionByGameTitleURIAndAnimalNameAndActionNameTest_GameDoesNotExists() throws Exception {
+	void getActionTest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
 				"invalid")).thenThrow(EntityNotFoundException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService
-				.readActionByGameTitleURIAndAnimalNameAndActionName(this.titleURI, this.animalName, "invalid"));
+		assertThrows(EntityNotFoundException.class,
+				() -> this.gameService.getAction(this.titleURI, this.animalName, "invalid"));
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
 				"invalid");
