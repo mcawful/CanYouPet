@@ -37,17 +37,17 @@ import com.mcawful.canyoupet.dtos.GameDto;
 import com.mcawful.canyoupet.services.GameService;
 
 /**
- * Tests for the {@link GameController} methods.
+ * Tests for the {@link RestGetControllerMvc} methods.
  * 
  * @author Michael McAuliffe
  *
  */
 @SpringBootTest
 @AutoConfigureMockMvc
-class GameControllerTest {
+class RestGetControllerMvcTest {
 
 	@Autowired
-	private GameController gameController;
+	private RestGetControllerMvc restGetControllerMvc;
 
 	@Autowired
 	private MockMvc mockMvc;
@@ -93,7 +93,7 @@ class GameControllerTest {
 	@BeforeEach
 	void setUp() throws Exception {
 
-		this.mockMvc = MockMvcBuilders.standaloneSetup(this.gameController)
+		this.mockMvc = MockMvcBuilders.standaloneSetup(this.restGetControllerMvc)
 				.setControllerAdvice(GlobalControllerExceptionHandler.class).build();
 
 		this.baseURI = "/api";
@@ -121,18 +121,18 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Test asserts that the {@link GameController} has been instantiated.
+	 * Test asserts that the {@link RestGetControllerMvc} has been instantiated.
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void contextLoads() throws Exception {
 
-		assertThat(this.gameController).isNotNull();
+		assertThat(this.restGetControllerMvc).isNotNull();
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getAllGames} method.
+	 * Tests the {@link RestGetControllerMvc} {@code getAllGames} method.
 	 * <p>
 	 * Test performs the appropriate {@code GET} request to call the
 	 * {@code getAllGames} endpoint, expects the response status to be {@code OK}
@@ -156,7 +156,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getGame} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getGame} method when passed a
 	 * {@code titleURL} that matches an existing {@link Game} object.
 	 * <p>
 	 * Test performs the appropriate {@code GET} request to call the {@code getGame}
@@ -181,7 +181,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getGame} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getGame} method when passed a
 	 * {@code titleURL} that does not match an existing {@link Game} object.
 	 * <p>
 	 * Test performs the appropriate {@code GET} request to call the {@code getGame}
@@ -204,7 +204,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getAnimal} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getAnimal} method when passed a
 	 * {@code titleURL} that matches an existing {@link Game} object and a
 	 * {@code name} that matches a related {@link Animal} object.
 	 * <p>
@@ -230,7 +230,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getAnimal} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getAnimal} method when passed a
 	 * {@code name} of a related {@link Animal} object that does not match in an
 	 * existing {@link Game} object.
 	 * <p>
@@ -255,7 +255,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getAction} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getAction} method when passed a
 	 * {@code titleURL} that matches an existing {@link Game} object and a
 	 * {@code name} that matches a related {@link Animal} object and a {@code name}
 	 * that matches a related {@link Action} object of the related {@link Animal}
@@ -283,7 +283,7 @@ class GameControllerTest {
 	}
 
 	/**
-	 * Tests the {@link GameController} {@code getAction} method when passed a
+	 * Tests the {@link RestGetControllerMvc} {@code getAction} method when passed a
 	 * {@code name} of a related {@link Action} of a related {@link Animal} object
 	 * that does not match in an existing {@link Game} object.
 	 * <p>
