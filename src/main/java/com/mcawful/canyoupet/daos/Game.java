@@ -53,7 +53,7 @@ public class Game {
 	private String title;
 
 	/**
-	 * The {@link List of {@link Animal} objects in the {@link Game} object.
+	 * The {@link List} of {@link Animal} objects in the {@link Game} object.
 	 */
 	@OneToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
 	@Column(nullable = false)
