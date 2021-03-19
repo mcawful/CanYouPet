@@ -41,17 +41,16 @@ public class Action {
 	private String name;
 
 	/**
-	 * The {@link String} source URL of the {@link Action} object.
-	 */
-	@Column(nullable = false)
-	@NonNull
-	private String sourceURL;
-
-	/**
 	 * Indicates if the action of the {@link Action} object can be done.
 	 */
 	@Column(nullable = false)
 	@NonNull
 	private Boolean canYou;
 
+	/**
+	 * The {@link String} source URL of the {@link Action} object.
+	 */
+	@Column(nullable = false)
+	@NonNull
+	private String sourceURL;
 }
