@@ -9,7 +9,7 @@ import static org.mockito.Mockito.when;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import java.util.Arrays;
-import javax.persistence.EntityNotFoundException;
+import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -142,7 +142,7 @@ class GameControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void getAllGameAnimalActionsTest_Success() throws Exception {
+	void getAllsTest_Success() throws Exception {
 
 		when(this.gameService.getAllGames()).thenReturn(Arrays.asList(game));
 
@@ -167,11 +167,11 @@ class GameControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void getGameAnimalActionTest_GameExists() throws Exception {
+	void getGameTest_GameExists() throws Exception {
 
 		when(this.gameService.getGame(this.titleURI)).thenReturn(this.game);
 
-		String path = this.baseURI;
+		String path = this.baseURI + "/" + this.titleURI;
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isOk())
@@ -191,11 +191,11 @@ class GameControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void getGameAnimalActionTest_GameDoesNotExist() throws Exception {
+	void getGameTest_GameDoesNotExist() throws Exception {
 
-		when(this.gameService.getGame("invalid")).thenThrow(EntityNotFoundException.class);
+		when(this.gameService.getGame("invalid")).thenThrow(NoSuchElementException.class);
 
-		String path = this.baseURI;
+		String path = this.baseURI + "/invalid";
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isNotFound());
@@ -216,11 +216,11 @@ class GameControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void getAnimalActionTest_AnimalExists() throws Exception {
+	void getAnimalTest_AnimalExists() throws Exception {
 
 		when(this.gameService.getAnimal(this.titleURI, this.animalName)).thenReturn(this.animal);
 
-		String path = this.baseURI + "/" + this.titleURI;
+		String path = this.baseURI + "/" + this.titleURI + "/" + this.animalName;
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isOk())
@@ -242,11 +242,11 @@ class GameControllerTest {
 	 * @throws Exception
 	 */
 	@Test
-	void getAnimalActionTest_AnimalDoesNotExist() throws Exception {
+	void getAnimalTest_AnimalDoesNotExist() throws Exception {
 
-		when(this.gameService.getAnimal(this.titleURI, "invalid")).thenThrow(EntityNotFoundException.class);
+		when(this.gameService.getAnimal(this.titleURI, "invalid")).thenThrow(NoSuchElementException.class);
 
-		String path = this.baseURI + "/" + this.titleURI;
+		String path = this.baseURI + "/" + this.titleURI + "/invalid";
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isNotFound());
@@ -273,7 +273,7 @@ class GameControllerTest {
 
 		when(this.gameService.getAction(this.titleURI, this.animalName, this.actionName)).thenReturn(this.action);
 
-		String path = this.baseURI + "/" + this.titleURI + "/" + this.animalName;
+		String path = this.baseURI + "/" + this.titleURI + "/" + this.animalName + "/" + this.actionName;
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isOk())
@@ -298,9 +298,9 @@ class GameControllerTest {
 	void getActionTest_ActionDoesNotExist() throws Exception {
 
 		when(this.gameService.getAction(this.titleURI, this.animalName, "invalid"))
-				.thenThrow(EntityNotFoundException.class);
+				.thenThrow(NoSuchElementException.class);
 
-		String path = this.baseURI + "/" + this.titleURI + "/" + this.animalName;
+		String path = this.baseURI + "/" + this.titleURI + "/" + this.animalName + "/invalid";
 		RequestBuilder request = MockMvcRequestBuilders.get(path);
 
 		this.mockMvc.perform(request).andExpect(status().isNotFound());
