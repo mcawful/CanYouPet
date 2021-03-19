@@ -4,8 +4,7 @@
 package com.mcawful.canyoupet.services;
 
 import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.NoSuchElementException;
 
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
@@ -34,10 +33,10 @@ public interface GameService {
 	 * @param titleURI the {@code titleURI} {@link String} field of the {@link Game}
 	 *                 object
 	 * @return a {@link Game} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
-	public Game getGame(String titleURI) throws EntityNotFoundException;
+	public Game getGame(String titleURI) throws NoSuchElementException;
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} and
@@ -49,10 +48,10 @@ public interface GameService {
 	 * @param animalName the {@code name} {@link String} field of the related
 	 *                   {@link Animal} object of the {@link Game} object
 	 * @return a {@link Animal} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
-	public Animal getAnimal(String titleURI, String animalName) throws EntityNotFoundException;
+	public Animal getAnimal(String titleURI, String animalName) throws NoSuchElementException;
 
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} and
@@ -68,8 +67,8 @@ public interface GameService {
 	 *                   {@link Action} object of the related {@link Animal} object
 	 *                   of the {@link Game} object
 	 * @return a {@link Action} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
-	public Action getAction(String titleURI, String animalName, String actionName) throws EntityNotFoundException;
+	public Action getAction(String titleURI, String animalName, String actionName) throws NoSuchElementException;
 }

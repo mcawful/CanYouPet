@@ -4,8 +4,7 @@
 package com.mcawful.canyoupet.services;
 
 import java.util.List;
-
-import javax.persistence.EntityNotFoundException;
+import java.util.NoSuchElementException;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -57,13 +56,13 @@ public class GameServiceImpl implements GameService {
 	 * @param titleURI the {@code titleURI} {@link String} field of the {@link Game}
 	 *                 object
 	 * @return a {@link Game} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
 	@Override
-	public Game getGame(String titleURI) throws EntityNotFoundException {
+	public Game getGame(String titleURI) throws NoSuchElementException {
 
-		return this.gameRepo.findByTitleURI(titleURI).orElseThrow(EntityNotFoundException::new);
+		return this.gameRepo.findByTitleURI(titleURI).orElseThrow(NoSuchElementException::new);
 	}
 
 	/**
@@ -76,17 +75,17 @@ public class GameServiceImpl implements GameService {
 	 * @param animalName the {@code name} {@link String} field of the related
 	 *                   {@link Animal} object of the {@link Game} object
 	 * @return a {@link Animal} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
 	@Override
-	public Animal getAnimal(String titleURI, String animalName) throws EntityNotFoundException {
+	public Animal getAnimal(String titleURI, String animalName) throws NoSuchElementException {
 
 		Game game = this.gameRepo.findByTitleURIAndAnimals_Name(titleURI, animalName)
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NoSuchElementException::new);
 
 		return game.getAnimals().stream().filter(a -> a.getName().equals(animalName)).findFirst()
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NoSuchElementException::new);
 	}
 
 	/**
@@ -103,20 +102,20 @@ public class GameServiceImpl implements GameService {
 	 *                   {@link Action} object of the related {@link Animal} object
 	 *                   of the {@link Game} object
 	 * @return a {@link Action} object
-	 * @throws EntityNotFoundException when a matching {@link Game} object cannot be
-	 *                                 found in the repository
+	 * @throws NoSuchElementException when a matching {@link Game} object cannot be
+	 *                                found in the repository
 	 */
 	@Override
-	public Action getAction(String titleURI, String animalName, String actionName) throws EntityNotFoundException {
+	public Action getAction(String titleURI, String animalName, String actionName) throws NoSuchElementException {
 
 		Game game = this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(titleURI, animalName, actionName)
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NoSuchElementException::new);
 
 		Animal animal = game.getAnimals().stream().filter(a -> a.getName().equals(animalName)).findFirst()
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NoSuchElementException::new);
 
 		return animal.getActions().stream().filter(a -> a.getName().equals(actionName)).findFirst()
-				.orElseThrow(EntityNotFoundException::new);
+				.orElseThrow(NoSuchElementException::new);
 	}
 
 }

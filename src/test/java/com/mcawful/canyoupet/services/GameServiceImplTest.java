@@ -10,9 +10,8 @@ import static org.mockito.Mockito.when;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Optional;
-
-import javax.persistence.EntityNotFoundException;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
@@ -152,16 +151,16 @@ class GameServiceImplTest {
 	 * {@code titleURI} {@link String} that does not match a {@link Game} object.
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo} {@code findByTitleURI} method
-	 * was called and asserts that a {@link EntityNotFoundException} was thrown.
+	 * was called and asserts that a {@link NoSuchElementException} was thrown.
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void getGameTest_GameDoesNotExists() throws Exception {
 
-		when(this.gameRepo.findByTitleURI("invalid")).thenThrow(EntityNotFoundException.class);
+		when(this.gameRepo.findByTitleURI("invalid")).thenThrow(NoSuchElementException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService.getGame("invalid"));
+		assertThrows(NoSuchElementException.class, () -> this.gameService.getGame("invalid"));
 
 		verify(this.gameRepo).findByTitleURI("invalid");
 	}
@@ -196,7 +195,7 @@ class GameServiceImplTest {
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_Name} method was called and asserts that a
-	 * {@link EntityNotFoundException} was thrown.
+	 * {@link NoSuchElementException} was thrown.
 	 * 
 	 * @throws Exception
 	 */
@@ -204,9 +203,9 @@ class GameServiceImplTest {
 	void getAnimalTest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, "invalid"))
-				.thenThrow(EntityNotFoundException.class);
+				.thenThrow(NoSuchElementException.class);
 
-		assertThrows(EntityNotFoundException.class, () -> this.gameService.getAnimal(this.titleURI, "invalid"));
+		assertThrows(NoSuchElementException.class, () -> this.gameService.getAnimal(this.titleURI, "invalid"));
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_Name(this.titleURI, "invalid");
 	}
@@ -247,7 +246,7 @@ class GameServiceImplTest {
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_NameAndAnimals_Actions_Name} method was
-	 * called and asserts that a {@link EntityNotFoundException} was thrown.
+	 * called and asserts that a {@link NoSuchElementException} was thrown.
 	 * 
 	 * @throws Exception
 	 */
@@ -255,9 +254,9 @@ class GameServiceImplTest {
 	void getActionTest_GameDoesNotExists() throws Exception {
 
 		when(this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
-				"invalid")).thenThrow(EntityNotFoundException.class);
+				"invalid")).thenThrow(NoSuchElementException.class);
 
-		assertThrows(EntityNotFoundException.class,
+		assertThrows(NoSuchElementException.class,
 				() -> this.gameService.getAction(this.titleURI, this.animalName, "invalid"));
 
 		verify(this.gameRepo).findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
