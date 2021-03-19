@@ -20,26 +20,26 @@ import lombok.experimental.NonFinal;
  *
  */
 @Value
-public class AnimalActionDto {
+public class AnimalDto {
 
 	/**
-	 * The {@code animalName} {@link String} of the {@link AnimalActionDto} object.
+	 * The {@code animalName} {@link String} of the {@link AnimalDto} object.
 	 */
 	private String animalName;
 
 	/**
-	 * The {@link List} of {@link ActionDto} objects of the {@link AnimalActionDto}
+	 * The {@link List} of {@link ActionDto} objects of the {@link AnimalDto}
 	 * object.
 	 */
 	@NonFinal
 	private List<ActionDto> actions;
 
 	/**
-	 * Constructs a {@link AnimalActionDto} from an {@link Animal} object.
+	 * Constructs a {@link AnimalDto} from an {@link Animal} object.
 	 * 
 	 * @param animal the {@link Animal} object to construct from
 	 */
-	public AnimalActionDto(Animal animal) {
+	public AnimalDto(Animal animal) {
 
 		this.animalName = animal.getName();
 		this.actions = animal.getActions().stream().map(action -> new ActionDto(action)).collect(Collectors.toList());

@@ -20,30 +20,30 @@ import lombok.experimental.NonFinal;
  *
  */
 @Value
-public class GameAnimalActionDto {
+public class GameDto {
 
 	/**
-	 * The {@code gameTitle} {@link String} of the {@link GameAnimalActionDto}
+	 * The {@code gameTitle} {@link String} of the {@link GameDto}
 	 * object.
 	 */
 	private String gameTitle;
 
 	/**
-	 * The {@link List} of {@link AnimalActionDto} objects of the
-	 * {@link GameAnimalActionDto} object.
+	 * The {@link List} of {@link AnimalDto} objects of the
+	 * {@link GameDto} object.
 	 */
 	@NonFinal
-	private List<AnimalActionDto> animalActions;
+	private List<AnimalDto> animalActions;
 
 	/**
-	 * Constructs a {@link GameAnimalActionDto} from a {@link Game} object.
+	 * Constructs a {@link GameDto} from a {@link Game} object.
 	 * 
 	 * @param game the {@link Game} object to construct from
 	 */
-	public GameAnimalActionDto(Game game) {
+	public GameDto(Game game) {
 
 		this.gameTitle = game.getTitle();
-		this.animalActions = game.getAnimals().stream().map(animalAction -> new AnimalActionDto(animalAction))
+		this.animalActions = game.getAnimals().stream().map(animalAction -> new AnimalDto(animalAction))
 				.collect(Collectors.toList());
 	}
 }
