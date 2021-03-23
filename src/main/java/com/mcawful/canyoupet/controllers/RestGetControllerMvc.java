@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.mcawful.canyoupet.daos.Action;
+import com.mcawful.canyoupet.daos.Animal;
+import com.mcawful.canyoupet.daos.Game;
 import com.mcawful.canyoupet.dtos.ActionDto;
 import com.mcawful.canyoupet.dtos.AnimalDto;
 import com.mcawful.canyoupet.dtos.GameDto;
