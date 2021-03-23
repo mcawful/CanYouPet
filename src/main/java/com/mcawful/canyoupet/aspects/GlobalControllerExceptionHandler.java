@@ -8,7 +8,6 @@ import java.util.NoSuchElementException;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -29,7 +28,7 @@ public class GlobalControllerExceptionHandler {
 	 */
 	@ExceptionHandler(value = DataIntegrityViolationException.class)
 	public ResponseEntity<String> handleConflict() {
-		return ResponseEntity.status(HttpStatus.CONFLICT).contentType(MediaType.APPLICATION_JSON).body("Conflict"); // 409
+		return ResponseEntity.status(HttpStatus.CONFLICT).build(); // 409
 	}
 
 	/**
@@ -38,7 +37,7 @@ public class GlobalControllerExceptionHandler {
 	 */
 	@ExceptionHandler(value = { NoSuchElementException.class, EmptyResultDataAccessException.class })
 	public ResponseEntity<String> handleNotFound() {
-		return ResponseEntity.status(HttpStatus.NOT_FOUND).contentType(MediaType.APPLICATION_JSON).body("Not Found"); // 404
+		return ResponseEntity.notFound().build(); // 404
 	}
 
 	/**
@@ -47,6 +46,6 @@ public class GlobalControllerExceptionHandler {
 	 */
 	@ExceptionHandler(value = IllegalArgumentException.class)
 	public ResponseEntity<String> handleBadRequest() {
-		return ResponseEntity.badRequest().contentType(MediaType.APPLICATION_JSON).body("Bad Request"); // 400
+		return ResponseEntity.badRequest().build(); // 400
 	}
 }
