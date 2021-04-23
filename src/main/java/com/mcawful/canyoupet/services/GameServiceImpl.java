@@ -81,11 +81,8 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public Animal getAnimal(String titleURI, String animalName) throws NoSuchElementException {
 
-		Game game = this.gameRepo.findByTitleURIAndAnimals_Name(titleURI, animalName)
-				.orElseThrow(NoSuchElementException::new);
-
-		return game.getAnimals().stream().filter(a -> a.getName().equals(animalName)).findFirst()
-				.orElseThrow(NoSuchElementException::new);
+		return this.gameRepo.findByTitleURIAndAnimals_Name(titleURI, animalName)
+				.orElseThrow(NoSuchElementException::new).getAnimalByName(animalName);
 	}
 
 	/**
@@ -108,14 +105,8 @@ public class GameServiceImpl implements GameService {
 	@Override
 	public Action getAction(String titleURI, String animalName, String actionName) throws NoSuchElementException {
 
-		Game game = this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(titleURI, animalName, actionName)
-				.orElseThrow(NoSuchElementException::new);
-
-		Animal animal = game.getAnimals().stream().filter(a -> a.getName().equals(animalName)).findFirst()
-				.orElseThrow(NoSuchElementException::new);
-
-		return animal.getActions().stream().filter(a -> a.getName().equals(actionName)).findFirst()
-				.orElseThrow(NoSuchElementException::new);
+		return this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(titleURI, animalName, actionName)
+				.orElseThrow(NoSuchElementException::new).getActionByAnimalNameAndActionName(animalName, actionName);
 	}
 
 }

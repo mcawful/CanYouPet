@@ -3,6 +3,7 @@
  */
 package com.mcawful.canyoupet.repos;
 
+import java.util.List;
 import java.util.Optional;
 
 import javax.persistence.OneToMany;
@@ -13,6 +14,8 @@ import org.springframework.stereotype.Repository;
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.views.ActionView;
+import com.mcawful.canyoupet.views.AnimalView;
 
 /**
  * Repository layer for {@link Game} objects.
@@ -39,23 +42,23 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	public Optional<Game> findByTitleURI(String titleURI);
 
 	/**
-	 * Finds a {@link Game} object based off of its {@code titleURI} {@link String}
-	 * field and its related {@link Animal} object's {@code name} {@link String}
-	 * field.
+	 * Finds an {@link AnimalView} object based off of a related {@link Game}
+	 * object's {@code titleURI} {@link String} field and the related {@link Animal}
+	 * object's {@code name} {@link String} field.
 	 * 
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object to find
 	 * @param animalName the {@code name} {@link String} of the related
 	 *                   {@link Animal} object in the {@link Game} object to find
-	 * @return an {@link Optional} of a {@link Game} object
+	 * @return an {@link Optional} of a {@link AnimalView} object
 	 */
-	public Optional<Game> findByTitleURIAndAnimals_Name(String titleURI, String animalName);
+	public Optional<AnimalView> findByTitleURIAndAnimals_Name(String titleURI, String animalName);
 
 	/**
-	 * Finds a {@link Game} object based off of its {@code titleURI} {@link String}
-	 * field and its related {@link Animal} object's {@code name} {@link String}
-	 * field and the {@link Animal} object's related {@link Action} object's
-	 * {@code name} field.
+	 * Finds an {@link ActionView} object based off of a related {@link Game}
+	 * object's {@code titleURI} {@link String} field and the related {@link Animal}
+	 * object's {@code name} {@link String} field and the {@link Animal} object's
+	 * related {@link Action} object's {@code name} field.
 	 * 
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object to find
@@ -64,8 +67,8 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 * @param actionName the {@code name} {@link String} of the {@link Action}
 	 *                   object of the related {@link Animal} object of the related
 	 *                   {@link Game} object to find
-	 * @return an {@link Optional} of a {@link Game} object
+	 * @return an {@link Optional} of a {@link ActionView} object
 	 */
-	public Optional<Game> findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(String titleURI, String animalName,
+	public Optional<ActionView> findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(String titleURI, String animalName,
 			String actionName);
 }
