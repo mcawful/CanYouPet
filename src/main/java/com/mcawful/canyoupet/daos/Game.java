@@ -59,5 +59,4 @@ public class Game {
 	@Column(nullable = false)
 	@NonNull
 	private List<Animal> animals;
-
 }

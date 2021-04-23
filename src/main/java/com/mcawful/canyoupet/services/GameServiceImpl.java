@@ -45,7 +45,6 @@ public class GameServiceImpl implements GameService {
 	 */
 	@Override
 	public List<Game> getAllGames() {
-
 		return this.gameRepo.findAll();
 	}
 
@@ -61,7 +60,6 @@ public class GameServiceImpl implements GameService {
 	 */
 	@Override
 	public Game getGame(String titleURI) throws NoSuchElementException {
-
 		return this.gameRepo.findByTitleURI(titleURI).orElseThrow(NoSuchElementException::new);
 	}
 
@@ -80,7 +78,6 @@ public class GameServiceImpl implements GameService {
 	 */
 	@Override
 	public Animal getAnimal(String titleURI, String animalName) throws NoSuchElementException {
-
 		return this.gameRepo.findByTitleURIAndAnimals_Name(titleURI, animalName)
 				.orElseThrow(NoSuchElementException::new).getAnimalByName(animalName);
 	}
@@ -104,9 +101,7 @@ public class GameServiceImpl implements GameService {
 	 */
 	@Override
 	public Action getAction(String titleURI, String animalName, String actionName) throws NoSuchElementException {
-
 		return this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(titleURI, animalName, actionName)
 				.orElseThrow(NoSuchElementException::new).getActionByAnimalNameAndActionName(animalName, actionName);
 	}
-
 }

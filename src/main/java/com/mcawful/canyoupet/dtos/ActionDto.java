@@ -25,7 +25,7 @@ public class ActionDto {
 	 * The {@code canYou} {@link Boolean} of the {@link ActionDto} object.
 	 */
 	private Boolean canYou;
-	
+
 	/**
 	 * The {@code sourceURL} {@link String} of the {@link ActionDto} object.
 	 */

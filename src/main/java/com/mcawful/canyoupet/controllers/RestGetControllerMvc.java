@@ -55,7 +55,6 @@ public class RestGetControllerMvc {
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<GameDto> getAllGames() {
-
 		return this.gameService.getAllGames().stream().map(game -> new GameDto(game)).collect(Collectors.toList());
 	}
 
@@ -69,7 +68,6 @@ public class RestGetControllerMvc {
 	@GetMapping("/{titleURI}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public GameDto getGame(@PathVariable String titleURI) {
-
 		return new GameDto(this.gameService.getGame(titleURI));
 	}
 
@@ -84,7 +82,6 @@ public class RestGetControllerMvc {
 	@GetMapping("/{titleURI}/{animalName}")
 	@ResponseStatus(value = HttpStatus.OK)
 	public AnimalDto getAnimal(@PathVariable String titleURI, @PathVariable String animalName) {
-
 		return new AnimalDto(this.gameService.getAnimal(titleURI, animalName));
 	}
 
@@ -101,7 +98,6 @@ public class RestGetControllerMvc {
 	@ResponseStatus(value = HttpStatus.OK)
 	public ActionDto getAction(@PathVariable String titleURI, @PathVariable String animalName,
 			@PathVariable String actionName) {
-
 		return new ActionDto(this.gameService.getAction(titleURI, animalName, actionName));
 	}
 }

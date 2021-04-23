@@ -17,7 +17,6 @@ interface ActionListView extends AnimalView {
 
 	@Override
 	default Animal getAnimalByName(String name) {
-
 		return AnimalView.super.getAnimalByName(name);
 	}
 
@@ -28,7 +27,6 @@ interface ActionListView extends AnimalView {
 	 * @return
 	 */
 	default List<Action> getActionsByAnimalName(String animalName) {
-
 		return getAnimalByName(animalName).getActions();
 
 	}
@@ -40,7 +38,6 @@ interface ActionListView extends AnimalView {
 	 * @return
 	 */
 	default Action getActionByAnimalNameAndActionName(String animalName, String actionName) {
-
 		return getActionsByAnimalName(animalName).stream().filter(action -> action.getName().equals(actionName))
 				.findFirst().orElseThrow(NoSuchElementException::new);
 	}
