@@ -19,6 +19,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.views.ActionView;
+import com.mcawful.canyoupet.views.AnimalView;
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 
@@ -88,7 +90,6 @@ class GameRepoTest {
 	 */
 	@AfterEach
 	void tearDown() throws Exception {
-
 		this.gameRepo.delete(this.game);
 	}
 
@@ -99,7 +100,6 @@ class GameRepoTest {
 	 */
 	@Test
 	void contextLoads() throws Exception {
-
 		assertThat(this.gameRepo).isNotNull();
 	}
 
@@ -116,7 +116,6 @@ class GameRepoTest {
 	 */
 	@Test
 	void findByTitleURITest_GameExists() throws Exception {
-
 		Game returned = new Game();
 
 		try {
@@ -126,7 +125,7 @@ class GameRepoTest {
 			fail("A NoSuchElementException was thrown when no exception was expected to be thrown");
 		}
 
-		assertEquals(this.game.toString(), returned.toString());
+		assertEquals(this.game, returned);
 	}
 
 	/**
@@ -141,7 +140,6 @@ class GameRepoTest {
 	 */
 	@Test
 	void findByTitleURITest_GameDoesNotExist() throws Exception {
-
 		Optional<Game> returned = this.gameRepo.findByTitleURI("invalid");
 
 		assertThrows(NoSuchElementException.class, () -> returned.orElseThrow(NoSuchElementException::new));
@@ -154,26 +152,26 @@ class GameRepoTest {
 	 * and a {@code name} {@link String} that matches the related {@link Animal}
 	 * object in the repository.
 	 * <p>
-	 * Test asserts that the {@link Game} object from the returned {@link Optional}
-	 * equals what is expected and that the {@link Optional} does not throw a
+	 * Test asserts that the {@code getByAnimalName} method of the
+	 * {@link AnimalView} object from the returned {@link Optional} returns the
+	 * expected {@link Animal} object and that the {@link Optional} does not throw a
 	 * {@link NoSuchElementException}.
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void findByTitleURIAndAnimals_NameTest_GameExists() throws Exception {
-
-		Game returned = new Game();
+		Animal returned = new Animal();
 
 		try {
 			returned = this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, this.animalName)
-					.orElseThrow(NoSuchElementException::new);
+					.orElseThrow(NoSuchElementException::new).getAnimalByName(animalName);
 
 		} catch (NoSuchElementException e) {
 			fail("A NoSuchElementException was thrown when no exception was expected to be thrown");
 		}
 
-		assertEquals(this.game.toString(), returned.toString());
+		assertEquals(this.animal, returned);
 	}
 
 	/**
@@ -188,8 +186,7 @@ class GameRepoTest {
 	 */
 	@Test
 	void findByTitleURIAndAnimals_NameTest_GameDoesNotExist() throws Exception {
-
-		Optional<Game> returned = this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, "invalid");
+		Optional<AnimalView> returned = this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, "invalid");
 
 		assertThrows(NoSuchElementException.class, () -> returned.orElseThrow(NoSuchElementException::new));
 	}
@@ -202,26 +199,29 @@ class GameRepoTest {
 	 * object and a {@code name} {@link String} that matches the related
 	 * {@link Animal} object's related {@link Action} object in the repository.
 	 * <p>
-	 * Test asserts that the {@link Game} object from the returned {@link Optional}
-	 * equals what is expected and that the {@link Optional} does not throw a
+	 * Test asserts that the {@code getActionByAnimalNameAndActionName} method of
+	 * the {@link ActionView} object from the returned {@link Optional} returns the
+	 * expected {@link Action} object and that the {@link Optional} does not throw a
 	 * {@link NoSuchElementException}.
 	 * 
 	 * @throws Exception
 	 */
 	@Test
 	void findByTitleURIAndAnimals_NameAndAnimals_Actions_NameTest_GameExists() throws Exception {
-
-		Game returned = new Game();
+		Action returned = new Action();
 
 		try {
-			returned = this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI,
-					this.animalName, this.actionName).orElseThrow(NoSuchElementException::new);
+			returned = this.gameRepo
+					.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
+							this.actionName)
+					.orElseThrow(NoSuchElementException::new)
+					.getActionByAnimalNameAndActionName(animalName, actionName);
 
 		} catch (NoSuchElementException e) {
 			fail("A NoSuchElementException was thrown when no exception was expected to be thrown");
 		}
 
-		assertEquals(this.game.toString(), returned.toString());
+		assertEquals(this.action, returned);
 	}
 
 	/**
@@ -238,9 +238,8 @@ class GameRepoTest {
 	 */
 	@Test
 	void findByTitleURIAndAnimals_NameAndAnimals_Actions_NameTest_GameDoesNotExist() throws Exception {
-
-		Optional<Game> returned = this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI,
-				this.animalName, "invalid");
+		Optional<ActionView> returned = this.gameRepo
+				.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName, "invalid");
 
 		assertThrows(NoSuchElementException.class, () -> returned.orElseThrow(NoSuchElementException::new));
 	}
