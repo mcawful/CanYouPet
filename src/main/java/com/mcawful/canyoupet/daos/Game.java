@@ -3,6 +3,7 @@
  */
 package com.mcawful.canyoupet.daos;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -59,4 +60,44 @@ public class Game {
 	@Column(nullable = false)
 	@NonNull
 	private List<Animal> animals;
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Game other = (Game) obj;
+		if (animals == null) {
+			if (other.animals != null)
+				return false;
+		} else if (!new ArrayList<>(animals).equals(other.animals))
+			return false;
+		if (id != other.id)
+			return false;
+		if (title == null) {
+			if (other.title != null)
+				return false;
+		} else if (!title.equals(other.title))
+			return false;
+		if (titleURI == null) {
+			if (other.titleURI != null)
+				return false;
+		} else if (!titleURI.equals(other.titleURI))
+			return false;
+		return true;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((animals == null) ? 0 : animals.hashCode());
+		result = prime * result + id;
+		result = prime * result + ((title == null) ? 0 : title.hashCode());
+		result = prime * result + ((titleURI == null) ? 0 : titleURI.hashCode());
+		return result;
+	}
 }
