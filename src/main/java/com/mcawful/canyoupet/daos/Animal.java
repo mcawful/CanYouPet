@@ -30,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Entity
 public class Animal {
-
 	/**
 	 * The ID of the {@link Animal} object.
 	 */

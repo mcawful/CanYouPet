@@ -31,7 +31,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Entity
 public class Game {
-
 	/**
 	 * The ID of the {@link Game} object.
 	 */

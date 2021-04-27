@@ -25,7 +25,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 @Entity
 public class Action {
-
 	/**
 	 * The ID of the {@link Action} object.
 	 */
