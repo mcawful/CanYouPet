@@ -8,6 +8,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.SequenceGenerator;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -30,8 +31,10 @@ public class Action {
 	 * The ID of the {@link Action} object.
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "action_seq")
+	@SequenceGenerator(name = "action_seq")
+	@Column(name = "id")
+	private int actionId;
 
 	/**
 	 * The {@link String} name of the {@link Action} object.
