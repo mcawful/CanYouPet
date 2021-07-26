@@ -39,6 +39,6 @@ public class ActionDto {
 	public ActionDto(Action action) {
 		this.actionName = action.getName();
 		this.canYou = action.getCanYou();
-		this.sourceURL = action.getSourceURL();
+		this.sourceURL = action.getSource().getUrl();
 	}
 }
