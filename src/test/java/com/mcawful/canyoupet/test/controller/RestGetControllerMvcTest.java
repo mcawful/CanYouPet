@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.controllers;
+package com.mcawful.canyoupet.test.controller;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.mockito.Mockito.verify;
@@ -28,15 +28,16 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mcawful.canyoupet.aspects.GlobalControllerExceptionHandler;
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
-import com.mcawful.canyoupet.daos.Game;
-import com.mcawful.canyoupet.daos.Source;
-import com.mcawful.canyoupet.dtos.ActionDto;
-import com.mcawful.canyoupet.dtos.AnimalDto;
-import com.mcawful.canyoupet.dtos.GameDto;
-import com.mcawful.canyoupet.services.GameService;
+import com.mcawful.canyoupet.aspect.GlobalControllerExceptionHandler;
+import com.mcawful.canyoupet.controller.RestGetControllerMvc;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
+import com.mcawful.canyoupet.dao.Source;
+import com.mcawful.canyoupet.dto.ActionDto;
+import com.mcawful.canyoupet.dto.AnimalDto;
+import com.mcawful.canyoupet.dto.GameDto;
+import com.mcawful.canyoupet.service.GameService;
 
 /**
  * Tests for the {@link RestGetControllerMvc} methods.

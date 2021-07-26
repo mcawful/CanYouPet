@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.aspects;
+package com.mcawful.canyoupet.aspect;
 
 import java.util.NoSuchElementException;
 

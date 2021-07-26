@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.services;
+package com.mcawful.canyoupet.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -9,10 +9,10 @@ import java.util.NoSuchElementException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
-import com.mcawful.canyoupet.daos.Game;
-import com.mcawful.canyoupet.repos.GameRepo;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
+import com.mcawful.canyoupet.repo.GameRepo;
 
 /**
  * An implementation of the {@link GameService} interface to handle requests for

@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.controllers;
+package com.mcawful.canyoupet.controller;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,13 +14,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
-import com.mcawful.canyoupet.daos.Game;
-import com.mcawful.canyoupet.dtos.ActionDto;
-import com.mcawful.canyoupet.dtos.AnimalDto;
-import com.mcawful.canyoupet.dtos.GameDto;
-import com.mcawful.canyoupet.services.GameService;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
+import com.mcawful.canyoupet.dto.ActionDto;
+import com.mcawful.canyoupet.dto.AnimalDto;
+import com.mcawful.canyoupet.dto.GameDto;
+import com.mcawful.canyoupet.service.GameService;
 
 /**
  * Controller to handle {@code GET} requests for {@link Game} and related

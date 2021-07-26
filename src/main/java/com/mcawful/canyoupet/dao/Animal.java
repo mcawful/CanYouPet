@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.mcawful.canyoupet.daos;
+package com.mcawful.canyoupet.dao;
 
 import java.util.List;
 
@@ -22,7 +22,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DAO representing the {@code Game} entity.
+ * The DOA that represents the {@code Animal} entity.
  *
  * @author Michael McAuliffe
  *
@@ -31,37 +31,31 @@ import lombok.RequiredArgsConstructor;
 @NoArgsConstructor
 @RequiredArgsConstructor
 @Entity
-public class Game {
+public class Animal {
 
 	/**
-	 * The ID of the {@code Game} entity.
+	 * The ID of the {@code Animal} entity.
 	 */
 	@Id
-	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_seq")
-	@SequenceGenerator(name = "game_seq")
+	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_seq")
+	@SequenceGenerator(name = "animal_seq")
 	@Column(name = "id")
-	private int gameId;
+	private int animalId;
 
 	/**
-	 * The URI path of the {@code Game} endpoint.
+	 * The name of the {@code Animal}.
 	 */
-	@Column(nullable = false, unique = true)
+	@Column(nullable = false)
 	@NonNull
-	private String titleURI;
+	private String name;
 
 	/**
-	 * The title of the {@code Game}.
-	 */
-	@Column(nullable = false, unique = true)
-	@NonNull
-	private String title;
-
-	/**
-	 * The {@link List} of {@link Animal} objects the {@code Game} contains.
+	 * The {@link List} of {@link Action} objects that can be performed on the
+	 * {@code Animal}.
 	 */
 	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	@JoinColumn(name = "animal_id", nullable = false)
+	@JoinColumn(name = "actions_id", nullable = false)
 	@NonNull
-	private List<Animal> animals;
+	private List<Action> actions;
 
 }

@@ -1,4 +1,4 @@
-package com.mcawful.canyoupet;
+package com.mcawful.canyoupet.test;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

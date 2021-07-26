@@ -1,7 +1,7 @@
 /**
  *
  */
-package com.mcawful.canyoupet.daos;
+package com.mcawful.canyoupet.dao;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;

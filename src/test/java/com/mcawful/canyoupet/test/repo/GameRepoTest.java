@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.repos;
+package com.mcawful.canyoupet.test.repo;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.*;
@@ -19,10 +19,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 
-import com.mcawful.canyoupet.daos.Game;
-import com.mcawful.canyoupet.daos.Source;
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
+import com.mcawful.canyoupet.dao.Source;
+import com.mcawful.canyoupet.repo.GameRepo;
 
 /**
  * Tests for the {@link GameRepo} methods.

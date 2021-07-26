@@ -1,9 +1,9 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.dtos;
+package com.mcawful.canyoupet.dto;
 
-import com.mcawful.canyoupet.daos.Action;
+import com.mcawful.canyoupet.dao.Action;
 
 import lombok.Value;
 

@@ -1,14 +1,14 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.services;
+package com.mcawful.canyoupet.service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
-import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
 
 /**
  * A service interface to handle requests for {@link Game} objects.

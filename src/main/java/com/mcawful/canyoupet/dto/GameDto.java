@@ -1,13 +1,13 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.dtos;
+package com.mcawful.canyoupet.dto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Game;
 
 import lombok.Value;
 import lombok.experimental.NonFinal;

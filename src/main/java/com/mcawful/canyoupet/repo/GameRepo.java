@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.mcawful.canyoupet.repos;
+package com.mcawful.canyoupet.repo;
 
 import java.util.Optional;
 
@@ -10,9 +10,9 @@ import javax.persistence.OneToMany;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.mcawful.canyoupet.daos.Action;
-import com.mcawful.canyoupet.daos.Animal;
-import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.Game;
 
 /**
  * Repository layer for {@link Game} objects.
