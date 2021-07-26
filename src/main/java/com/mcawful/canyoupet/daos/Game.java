@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DAO entity representing the Game object.
+ * The DAO representing the {@code Game} entity.
  *
  * @author Michael McAuliffe
  *
@@ -33,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class Game {
 
 	/**
-	 * The ID of the {@link Game} object.
+	 * The ID of the {@code Game} entity.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "game_seq")
@@ -42,23 +43,23 @@ public class Game {
 	private int gameId;
 
 	/**
-	 * The {@link String} titleURI of the {@link Game} object.
+	 * The URI path of the {@code Game} endpoint.
 	 */
 	@Column(nullable = false, unique = true)
 	@NonNull
 	private String titleURI;
 
 	/**
-	 * The {@link String} title of the {@link Game} object.
+	 * The title of the {@code Game}.
 	 */
 	@Column(nullable = false, unique = true)
 	@NonNull
 	private String title;
 
 	/**
-	 * The {@link List} of {@link Animal} objects in the {@link Game} object.
+	 * The {@link List} of {@link Animal} objects the {@code Game} contains.
 	 */
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
 	@JoinColumn(name = "animal_id", nullable = false)
 	@NonNull
 	private List<Animal> animals;

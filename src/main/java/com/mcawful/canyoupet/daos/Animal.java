@@ -8,6 +8,7 @@ import java.util.List;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -21,7 +22,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DOA entity that represents the Animal object.
+ * The DOA that represents the {@code Animal} entity.
  *
  * @author Michael McAuliffe
  *
@@ -33,7 +34,7 @@ import lombok.RequiredArgsConstructor;
 public class Animal {
 
 	/**
-	 * The ID of the {@link Animal} object.
+	 * The ID of the {@code Animal} entity.
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "animal_seq")
@@ -42,17 +43,18 @@ public class Animal {
 	private int animalId;
 
 	/**
-	 * The {@link String} name of the {@link Animal} object.
+	 * The name of the {@code Animal}.
 	 */
 	@Column(nullable = false)
 	@NonNull
 	private String name;
 
 	/**
-	 * The {@link List} of {@link Action} objects in the {@link Animal} object.
+	 * The {@link List} of {@link Action} objects that can be performed on the
+	 * {@code Animal}.
 	 */
-	@OneToMany(cascade = { CascadeType.PERSIST, CascadeType.MERGE })
-	@JoinColumn(name = "action_id", nullable = false)
+	@OneToMany(cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	@JoinColumn(name = "actions_id", nullable = false)
 	@NonNull
 	private List<Action> actions;
 
