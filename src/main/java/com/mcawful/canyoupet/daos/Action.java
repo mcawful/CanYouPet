@@ -3,8 +3,6 @@
  */
 package com.mcawful.canyoupet.daos;
 
-import java.util.List;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -61,17 +59,5 @@ public class Action {
 	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
 	@JoinColumn(name = "source_id", nullable = false)
 	@NonNull
-	private List<Source> source;
-
-	/**
-	 * Gets the {@link Source} object.
-	 * <p>
-	 * The {@link List} of {@link Source} objects in the {@code Action} should only
-	 * ever contain a single {@link Source} object. Any {@link Source} objects
-	 * beyond the first in the {@link List} will be inaccessible.
-	 */
-	public Source getSource() {
-
-		return source.get(0);
-	}
+	private Source source;
 }
