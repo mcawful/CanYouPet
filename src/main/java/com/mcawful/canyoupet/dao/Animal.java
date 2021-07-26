@@ -22,7 +22,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DOA that represents the {@code Animal} entity.
+ * The DOA representing the {@code Animal} entity.
  *
  * @author Michael McAuliffe
  *

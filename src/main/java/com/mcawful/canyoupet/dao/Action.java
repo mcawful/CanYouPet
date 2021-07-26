@@ -19,7 +19,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 
 /**
- * The DOA that represents the {@code Action} entity.
+ * The DOA representing the {@code Action} entity.
  *
  * @author Michael McAuliffe
  *
