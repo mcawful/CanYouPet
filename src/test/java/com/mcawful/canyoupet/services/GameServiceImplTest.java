@@ -21,10 +21,12 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.daos.Source;
 import com.mcawful.canyoupet.repos.GameRepo;
 
 /**
@@ -34,6 +36,7 @@ import com.mcawful.canyoupet.repos.GameRepo;
  *
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class GameServiceImplTest {
 
 	@Autowired
@@ -48,11 +51,7 @@ class GameServiceImplTest {
 
 	private Action action;
 
-	private String titleURI;
-
-	private String animalName;
-
-	private String actionName;
+	private String titleURI, animalName, actionName, sourceURL;
 
 	/**
 	 * @throws java.lang.Exception
@@ -79,8 +78,10 @@ class GameServiceImplTest {
 		this.titleURI = "test_game";
 		this.animalName = "dog";
 		this.actionName = "pet";
+		this.sourceURL = "http://test.url";
+		
 
-		this.action = new Action(this.actionName, true, "http://test.url");
+		this.action = new Action(this.actionName, true, new Source(this.sourceURL));
 		this.animal = new Animal(this.animalName, Arrays.asList(this.action));
 		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
 	}

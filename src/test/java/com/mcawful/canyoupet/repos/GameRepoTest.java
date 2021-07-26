@@ -17,8 +17,10 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.ActiveProfiles;
 
 import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.daos.Source;
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 
@@ -29,9 +31,9 @@ import com.mcawful.canyoupet.daos.Animal;
  *
  */
 @SpringBootTest
+@ActiveProfiles("test")
 class GameRepoTest {
 
-	@Autowired
 	private GameRepo gameRepo;
 
 	private Game game;
@@ -40,11 +42,13 @@ class GameRepoTest {
 
 	private Action action;
 
-	private String titleURI;
+	private String titleURI, animalName, actionName, sourceURL;
 
-	private String animalName;
-
-	private String actionName;
+	@Autowired
+	private GameRepoTest(GameRepo gameRepo) {
+		super();
+		this.gameRepo = gameRepo;
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -61,8 +65,8 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Sets up the required objects for the tests and saves the {@link Game} object
-	 * to the mocked repository.
+	 * Sets up the required objects and saves the {@link Game} entity to the
+	 * repository.
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -72,8 +76,9 @@ class GameRepoTest {
 		this.titleURI = "test_game";
 		this.animalName = "dog";
 		this.actionName = "pet";
+		this.sourceURL = "http://test.url";
 
-		this.action = new Action(this.actionName, true, "http://test.url");
+		this.action = new Action(this.actionName, true, new Source(this.sourceURL));
 		this.animal = new Animal(this.animalName, Arrays.asList(this.action));
 		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
 
@@ -81,8 +86,7 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Removes the {@link Game} object used in testing from the {@link GameRepo}
-	 * repository.
+	 * Removes the saved {@link Game} and related entities from the repository.
 	 * 
 	 * @throws java.lang.Exception
 	 */
@@ -93,7 +97,7 @@ class GameRepoTest {
 	}
 
 	/**
-	 * Test asserts that the {@link GameRepo} has been instantiated.
+	 * Test asserts that the {@link Autowired} objects have been instantiated.
 	 * 
 	 * @throws Exception
 	 */

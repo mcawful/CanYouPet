@@ -20,6 +20,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -31,6 +32,7 @@ import com.mcawful.canyoupet.aspects.GlobalControllerExceptionHandler;
 import com.mcawful.canyoupet.daos.Action;
 import com.mcawful.canyoupet.daos.Animal;
 import com.mcawful.canyoupet.daos.Game;
+import com.mcawful.canyoupet.daos.Source;
 import com.mcawful.canyoupet.dtos.ActionDto;
 import com.mcawful.canyoupet.dtos.AnimalDto;
 import com.mcawful.canyoupet.dtos.GameDto;
@@ -43,6 +45,7 @@ import com.mcawful.canyoupet.services.GameService;
  *
  */
 @SpringBootTest
+@ActiveProfiles("test")
 @AutoConfigureMockMvc
 class RestGetControllerMvcTest {
 
@@ -61,15 +64,9 @@ class RestGetControllerMvcTest {
 
 	private Action action;
 
-	private String gameJson;
+	private String gameJson, animalJson, actionJson, allGamesJson;
 
-	private String animalJson;
-
-	private String actionJson;
-
-	private String allGamesJson;
-
-	private String baseURI, titleURI, animalName, actionName;
+	private String baseURI, titleURI, animalName, actionName, sourceURL;
 
 	/**
 	 * @throws java.lang.Exception
@@ -101,8 +98,9 @@ class RestGetControllerMvcTest {
 		this.titleURI = "test_game";
 		this.animalName = "dog";
 		this.actionName = "pet";
+		this.sourceURL = "http://test.url";
 
-		this.action = new Action(this.actionName, true, "http://test.url");
+		this.action = new Action(this.actionName, true, new Source(this.sourceURL));
 		this.animal = new Animal(this.animalName, Arrays.asList(this.action));
 		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
 
