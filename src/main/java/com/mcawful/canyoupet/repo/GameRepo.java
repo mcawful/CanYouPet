@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.repo;
 
@@ -21,7 +21,7 @@ import com.mcawful.canyoupet.dao.Game;
  * with a {@link List} of {@link Animal} objects. An {@link Animal} object in
  * turn also contains a {@link OneToMany} relationship with a {@link List} of
  * {@link Action} objects.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -31,7 +31,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	/**
 	 * Finds a {@link Game} object based off of its {@code titleURI} {@link String}
 	 * field.
-	 * 
+	 *
 	 * @param titleURI the {@code titleURI} {@link String} of the {@link Game}
 	 *                 object to find
 	 * @return an {@link Optional} of a {@link Game} object
@@ -42,7 +42,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 * Finds a {@link Game} object based off of its {@code titleURI} {@link String}
 	 * field and its related {@link Animal} object's {@code name} {@link String}
 	 * field.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object to find
 	 * @param animalName the {@code name} {@link String} of the related
@@ -56,7 +56,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 * field and its related {@link Animal} object's {@code name} {@link String}
 	 * field and the {@link Animal} object's related {@link Action} object's
 	 * {@code name} field.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object to find
 	 * @param animalName the {@code name} {@link String} of the related

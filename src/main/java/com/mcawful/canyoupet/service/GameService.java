@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.service;
 
@@ -12,7 +12,7 @@ import com.mcawful.canyoupet.dao.Game;
 
 /**
  * A service interface to handle requests for {@link Game} objects.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -21,7 +21,7 @@ public interface GameService {
 	/**
 	 * Retrieves a {@link List} of all {@link Game} objects by making a call to the
 	 * appropriate repository.
-	 * 
+	 *
 	 * @return a {@link List} of {@link Game} objects
 	 */
 	public List<Game> getAllGames();
@@ -29,7 +29,7 @@ public interface GameService {
 	/**
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} by
 	 * making a call to the appropriate repository.
-	 * 
+	 *
 	 * @param titleURI the {@code titleURI} {@link String} field of the {@link Game}
 	 *                 object
 	 * @return a {@link Game} object
@@ -42,7 +42,7 @@ public interface GameService {
 	 * Retrieves a {@link Game} object by the {@code titleURI} {@link String} and
 	 * the {@code name} {@link String} of the related {@link Animal} object by
 	 * making a call to the appropriate repository.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} field of the
 	 *                   {@link Game} object
 	 * @param animalName the {@code name} {@link String} field of the related
@@ -58,7 +58,7 @@ public interface GameService {
 	 * the {@code name} {@link String} of the related {@link Animal} object and the
 	 * {@code name} {@link String} of the related {@link Action} object of the
 	 * related {@link Animal} object by making a call to the appropriate repository.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} field of the
 	 *                   {@link Game} object
 	 * @param animalName the {@code name} {@link String} field of the related

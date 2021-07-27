@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.dto;
 
@@ -9,7 +9,7 @@ import lombok.Value;
 
 /**
  * A DTO that contains information from an {@link Action} object.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -25,7 +25,7 @@ public class ActionDto {
 	 * The {@code canYou} {@link Boolean} of the {@link ActionDto} object.
 	 */
 	private Boolean canYou;
-	
+
 	/**
 	 * The {@code sourceURL} {@link String} of the {@link ActionDto} object.
 	 */
@@ -33,7 +33,7 @@ public class ActionDto {
 
 	/**
 	 * Constructs an {@link ActionDto} object from an {@link Action} object.
-	 * 
+	 *
 	 * @param action the {@link Action} object to construct from
 	 */
 	public ActionDto(Action action) {

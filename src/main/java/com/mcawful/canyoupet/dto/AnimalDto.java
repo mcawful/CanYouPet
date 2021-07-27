@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.dto;
 
@@ -15,7 +15,7 @@ import lombok.experimental.NonFinal;
 /**
  * A DTO that contains information from an {@link Animal} object and the related
  * and {@link Action} objects.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -36,7 +36,7 @@ public class AnimalDto {
 
 	/**
 	 * Constructs a {@link AnimalDto} from an {@link Animal} object.
-	 * 
+	 *
 	 * @param animal the {@link Animal} object to construct from
 	 */
 	public AnimalDto(Animal animal) {

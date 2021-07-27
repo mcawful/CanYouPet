@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.dto;
 
@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.Animal;
 import com.mcawful.canyoupet.dao.Game;
 
 import lombok.Value;
@@ -15,7 +16,7 @@ import lombok.experimental.NonFinal;
 /**
  * A DTO that contains information from a {@link Game} object and the related
  * {@link Animal} and {@link Action} objects.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -40,7 +41,7 @@ public class GameDto {
 
 	/**
 	 * Constructs a {@link GameDto} from a {@link Game} object.
-	 * 
+	 *
 	 * @param game the {@link Game} object to construct from
 	 */
 	public GameDto(Game game) {

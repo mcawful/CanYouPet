@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.controller;
 
@@ -25,7 +25,7 @@ import com.mcawful.canyoupet.service.GameService;
 /**
  * Controller to handle {@code GET} requests for {@link Game} and related
  * {@link Animal} and {@link Action} objects.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -37,7 +37,7 @@ public class RestGetControllerMvc {
 
 	/**
 	 * Autowires the {@link GameService}.
-	 * 
+	 *
 	 * @param gameRepo
 	 */
 	@Autowired
@@ -49,7 +49,7 @@ public class RestGetControllerMvc {
 	/**
 	 * Handles a {@code GET} request for all {@link Game} objects. Response status
 	 * code is {@code OK} when the request is successful.
-	 * 
+	 *
 	 * @return a {@link List} of {@link GameDto} objects
 	 */
 	@GetMapping
@@ -61,7 +61,7 @@ public class RestGetControllerMvc {
 
 	/**
 	 * Handles a {@code GET} request for a single {@link Game} object.
-	 * 
+	 *
 	 * @param titleURI the {@code titleURI} {@link String} of the {@link Game}
 	 *                 object
 	 * @return a {@link GameDto} object
@@ -75,7 +75,7 @@ public class RestGetControllerMvc {
 
 	/**
 	 * Handles a {@code GET} request for a single {@link Animal} object.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object
 	 * @param animalName the {@code name} of the {@link Animal} object
@@ -90,7 +90,7 @@ public class RestGetControllerMvc {
 
 	/**
 	 * Handles a {@code GET} request for a single {@link Action} object.
-	 * 
+	 *
 	 * @param titleURI   the {@code titleURI} {@link String} of the {@link Game}
 	 *                   object
 	 * @param animalName the {@code name} of the {@link Animal} object

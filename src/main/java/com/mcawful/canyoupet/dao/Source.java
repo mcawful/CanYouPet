@@ -17,7 +17,7 @@ import lombok.RequiredArgsConstructor;
 
 /**
  * The DOA that represents the {@code Source} entity.
- * 
+ *
  * @author Michael McAuliffe
  *
  */

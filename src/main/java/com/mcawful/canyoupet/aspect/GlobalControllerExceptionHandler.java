@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.aspect;
 
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 /**
  * Advice class designed to handle HTTP response codes for various exceptions
  * that get thrown by the controllers.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
