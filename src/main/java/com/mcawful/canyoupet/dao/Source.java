@@ -10,10 +10,10 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The DOA that represents the {@code Source} entity.
@@ -21,19 +21,19 @@ import lombok.RequiredArgsConstructor;
  * @author Michael McAuliffe
  *
  */
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 public class Source {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "source_seq")
-	@SequenceGenerator(name = "source_seq")
+	@SequenceGenerator(name = "source_seq", allocationSize = 1)
 	@Column(name = "id")
 	private int sourceId;
 
 	@Column(nullable = false, unique = true)
-	@NonNull
 	private String url;
 }

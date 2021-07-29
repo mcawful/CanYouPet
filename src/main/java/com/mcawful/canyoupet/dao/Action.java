@@ -10,13 +10,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
+import lombok.Builder;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * The DOA representing the {@code Action} entity.
@@ -24,9 +25,10 @@ import lombok.RequiredArgsConstructor;
  * @author Michael McAuliffe
  *
  */
-@Data
-@NoArgsConstructor
-@RequiredArgsConstructor
+@Builder
+@Getter
+@Setter
+@EqualsAndHashCode
 @Entity
 public class Action {
 
@@ -35,29 +37,37 @@ public class Action {
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "action_seq")
-	@SequenceGenerator(name = "action_seq")
+	@SequenceGenerator(name = "action_seq", allocationSize = 1)
 	@Column(name = "id")
 	private int actionId;
 
 	/**
 	 * The name of the {@code Action}.
 	 */
-	@Column(nullable = false)
-	@NonNull
-	private String name;
+	@ManyToOne(cascade = CascadeType.ALL, optional = false)
+	@JoinColumn(name = "fk_action_name", nullable = false)
+	private ActionName name;
 
 	/**
 	 * Indicates if the {@code Action} can be done.
 	 */
 	@Column(nullable = false)
-	@NonNull
 	private Boolean canYou;
 
 	/**
 	 * The {@link Source} containing the URL.
 	 */
-	@OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)
-	@JoinColumn(name = "source_id", nullable = false)
-	@NonNull
+	@OneToOne(cascade = CascadeType.ALL)
+	@JoinColumn(name = "fk_source", nullable = false)
 	private Source source;
+
+	/**
+	 * Gets the name of the {@code Action}.
+	 *
+	 * @return {@link String} the action's name
+	 */
+	public String getName() {
+
+		return this.name.getName();
+	}
 }
