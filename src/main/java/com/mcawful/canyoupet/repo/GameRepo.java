@@ -8,11 +8,14 @@ import java.util.Optional;
 import javax.persistence.OneToMany;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 import com.mcawful.canyoupet.dao.Action;
 import com.mcawful.canyoupet.dao.Animal;
 import com.mcawful.canyoupet.dao.Game;
+
+// TODO: Rewrite Javadocs
 
 /**
  * Repository layer for {@link Game} objects.
@@ -49,7 +52,8 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 *                   {@link Animal} object in the {@link Game} object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
-	public Optional<Game> findByTitleURIAndAnimals_Name(String titleURI, String animalName);
+	@Query("SELECT an FROM Game g, Animal an, AnimalName ann WHERE g.titleURI = ?1 AND ann.name = ?2")
+	public Optional<Animal> findByTitleURIAndAnimalName(String titleURI, String animalName);
 
 	/**
 	 * Finds a {@link Game} object based off of its {@code titleURI} {@link String}
@@ -66,6 +70,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 *                   {@link Game} object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
-	public Optional<Game> findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(String titleURI, String animalName,
+	@Query("SELECT ac from Game g, AnimalName ann, Action ac, ActionName acn WHERE g.titleURI = ?1 AND ann.name = ?2 AND acn.name = ?3")
+	public Optional<Action> findByTitleURIAndAnimalNameAndActionName(String titleURI, String animalName,
 			String actionName);
 }

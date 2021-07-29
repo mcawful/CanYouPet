@@ -10,6 +10,8 @@ import com.mcawful.canyoupet.dao.Action;
 import com.mcawful.canyoupet.dao.Animal;
 import com.mcawful.canyoupet.dao.Game;
 
+// TODO: Rewrite Javadocs
+
 /**
  * A service interface to handle requests for {@link Game} objects.
  *
