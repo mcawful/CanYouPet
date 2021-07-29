@@ -1,5 +1,5 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.test.controller;
 
@@ -31,7 +31,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mcawful.canyoupet.aspect.GlobalControllerExceptionHandler;
 import com.mcawful.canyoupet.controller.RestGetControllerMvc;
 import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.ActionName;
 import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.AnimalName;
 import com.mcawful.canyoupet.dao.Game;
 import com.mcawful.canyoupet.dao.Source;
 import com.mcawful.canyoupet.dto.ActionDto;
@@ -41,7 +43,7 @@ import com.mcawful.canyoupet.service.GameService;
 
 /**
  * Tests for the {@link RestGetControllerMvc} methods.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -50,10 +52,8 @@ import com.mcawful.canyoupet.service.GameService;
 @AutoConfigureMockMvc
 class RestGetControllerMvcTest {
 
-	@Autowired
 	private RestGetControllerMvc restGetControllerMvc;
 
-	@Autowired
 	private MockMvc mockMvc;
 
 	@MockBean
@@ -67,7 +67,14 @@ class RestGetControllerMvcTest {
 
 	private String gameJson, animalJson, actionJson, allGamesJson;
 
-	private String baseURI, titleURI, animalName, actionName, sourceURL;
+	private String baseURI, title, titleURI, animalName, actionName, sourceURL;
+
+	@Autowired
+	private RestGetControllerMvcTest(RestGetControllerMvc restGetControllerMvc, MockMvc mockMvc) {
+		super();
+		this.restGetControllerMvc = restGetControllerMvc;
+		this.mockMvc = mockMvc;
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -85,7 +92,7 @@ class RestGetControllerMvcTest {
 
 	/**
 	 * Sets up the {@link MockMvc} and the various objects to be used in the tests.
-	 * 
+	 *
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
@@ -96,14 +103,18 @@ class RestGetControllerMvcTest {
 
 		this.baseURI = "/api";
 
+		this.title = "Test Game";
 		this.titleURI = "test_game";
 		this.animalName = "dog";
 		this.actionName = "pet";
 		this.sourceURL = "http://test.url";
 
-		this.action = new Action(this.actionName, true, new Source(this.sourceURL));
-		this.animal = new Animal(this.animalName, Arrays.asList(this.action));
-		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
+		this.action = Action.builder().name(ActionName.builder().name(this.actionName).build()).canYou(true)
+				.source(Source.builder().url(this.sourceURL).build()).build();
+		this.animal = Animal.builder().name(AnimalName.builder().name(this.actionName).build())
+				.actions(Arrays.asList(this.action)).build();
+		this.game = Game.builder().title(this.title).titleURI(this.titleURI).animals(Arrays.asList(this.animal))
+				.build();
 
 		this.gameJson = new ObjectMapper().writeValueAsString(new GameDto(this.game));
 		this.animalJson = new ObjectMapper().writeValueAsString(new AnimalDto(this.animal));
@@ -121,7 +132,7 @@ class RestGetControllerMvcTest {
 
 	/**
 	 * Test asserts that the {@link RestGetControllerMvc} has been instantiated.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -137,7 +148,7 @@ class RestGetControllerMvcTest {
 	 * {@code getAllGames} endpoint, expects the response status to be {@code OK}
 	 * and that the returned {@code JSON} matches what is expected. Test then
 	 * verifies that the {@link GameService} {@code getAllGames} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -162,7 +173,7 @@ class RestGetControllerMvcTest {
 	 * endpoint, expects the response status to be {@code OK} and that the returned
 	 * {@code JSON} matches what is expected. Test then verifies that the
 	 * {@link GameService} {@code getGame} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -186,7 +197,7 @@ class RestGetControllerMvcTest {
 	 * Test performs the appropriate {@code GET} request to call the {@code getGame}
 	 * endpoint and expects the response status to be {@code NOT_FOUND}. Test then
 	 * verifies that the {@link GameService} {@code getGame} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -211,7 +222,7 @@ class RestGetControllerMvcTest {
 	 * {@code getAnimal} endpoint, expects the response status to be {@code OK} and
 	 * that the returned {@code JSON} matches what is expected. Test then verifies
 	 * that the {@link GameService} {@code getAnimal} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -237,7 +248,7 @@ class RestGetControllerMvcTest {
 	 * {@code getAnimal} endpoint and expects the response status to be
 	 * {@code NOT_FOUND}. Test then verifies that the {@link GameService}
 	 * {@code getAnimal} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -264,7 +275,7 @@ class RestGetControllerMvcTest {
 	 * {@code getAction} endpoint, expects the response status to be {@code OK} and
 	 * that the returned {@code JSON} matches what is expected. Test then verifies
 	 * that the {@link GameService} {@code getAction} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -290,7 +301,7 @@ class RestGetControllerMvcTest {
 	 * {@code getAAction} endpoint and expects the response status to be
 	 * {@code NOT_FOUND}. Test then verifies that the {@link GameService}
 	 * {@code getAction} method was called.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test

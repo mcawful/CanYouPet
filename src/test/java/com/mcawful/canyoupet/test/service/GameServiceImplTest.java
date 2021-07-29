@@ -1,10 +1,11 @@
 /**
- * 
+ *
  */
 package com.mcawful.canyoupet.test.service;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
@@ -24,15 +25,19 @@ import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.ActiveProfiles;
 
 import com.mcawful.canyoupet.dao.Action;
+import com.mcawful.canyoupet.dao.ActionName;
 import com.mcawful.canyoupet.dao.Animal;
+import com.mcawful.canyoupet.dao.AnimalName;
 import com.mcawful.canyoupet.dao.Game;
 import com.mcawful.canyoupet.dao.Source;
 import com.mcawful.canyoupet.repo.GameRepo;
 import com.mcawful.canyoupet.service.GameServiceImpl;
 
+// TODO: Rewrite Javadocs
+
 /**
  * Tests for the {@link GameServiceImpl} methods.
- * 
+ *
  * @author Michael McAuliffe
  *
  */
@@ -40,7 +45,6 @@ import com.mcawful.canyoupet.service.GameServiceImpl;
 @ActiveProfiles("test")
 class GameServiceImplTest {
 
-	@Autowired
 	private GameServiceImpl gameService;
 
 	@MockBean
@@ -52,7 +56,13 @@ class GameServiceImplTest {
 
 	private Action action;
 
-	private String titleURI, animalName, actionName, sourceURL;
+	private String title, titleURI, animalName, actionName, sourceURL;
+
+	@Autowired
+	private GameServiceImplTest(GameServiceImpl gameService) {
+		super();
+		this.gameService = gameService;
+	}
 
 	/**
 	 * @throws java.lang.Exception
@@ -70,21 +80,24 @@ class GameServiceImplTest {
 
 	/**
 	 * Sets up the required objects for the tests.
-	 * 
+	 *
 	 * @throws java.lang.Exception
 	 */
 	@BeforeEach
 	void setUp() throws Exception {
 
+		this.title = "Test Game";
 		this.titleURI = "test_game";
 		this.animalName = "dog";
 		this.actionName = "pet";
 		this.sourceURL = "http://test.url";
-		
 
-		this.action = new Action(this.actionName, true, new Source(this.sourceURL));
-		this.animal = new Animal(this.animalName, Arrays.asList(this.action));
-		this.game = new Game(this.titleURI, "Test Game", Arrays.asList(this.animal));
+		this.action = Action.builder().name(ActionName.builder().name(this.actionName).build()).canYou(true)
+				.source(Source.builder().url(this.sourceURL).build()).build();
+		this.animal = Animal.builder().name(AnimalName.builder().name(this.actionName).build())
+				.actions(Arrays.asList(this.action)).build();
+		this.game = Game.builder().title(this.title).titleURI(this.titleURI).animals(Arrays.asList(this.animal))
+				.build();
 	}
 
 	/**
@@ -96,7 +109,7 @@ class GameServiceImplTest {
 
 	/**
 	 * Test asserts that the {@link GameServiceImpl} has been instantiated.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -111,7 +124,7 @@ class GameServiceImplTest {
 	 * Test verifies that the mocked {@link GameRepo} {@code findAll} method was
 	 * called and asserts that the {@link List} of {@link Game} objects matches what
 	 * is expected.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -133,7 +146,7 @@ class GameServiceImplTest {
 	 * Test verifies that the mocked {@link GameRepo} {@code findByTitleURI} method
 	 * was called and asserts that the returned {@link Game} object matches what is
 	 * expected.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -154,7 +167,7 @@ class GameServiceImplTest {
 	 * <p>
 	 * Test verifies that the mocked {@link GameRepo} {@code findByTitleURI} method
 	 * was called and asserts that a {@link NoSuchElementException} was thrown.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
@@ -175,17 +188,17 @@ class GameServiceImplTest {
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_Name} method was called and asserts that the
 	 * returned {@link Game} object matches what is expected.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	void getAnimalTest_GameExists() throws Exception {
 
-		when(this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, this.animalName)).thenReturn(Optional.of(game));
+		when(this.gameRepo.findByTitleURIAndAnimalName(this.titleURI, this.animalName)).thenReturn(Optional.of(animal));
 
 		Animal returned = this.gameService.getAnimal(this.titleURI, this.animalName);
 
-		verify(this.gameRepo).findByTitleURIAndAnimals_Name(this.titleURI, this.animalName);
+		verify(this.gameRepo).findByTitleURIAndAnimalName(this.titleURI, this.animalName);
 
 		assertEquals(this.animal, returned);
 	}
@@ -198,18 +211,18 @@ class GameServiceImplTest {
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_Name} method was called and asserts that a
 	 * {@link NoSuchElementException} was thrown.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	void getAnimalTest_GameDoesNotExists() throws Exception {
 
-		when(this.gameRepo.findByTitleURIAndAnimals_Name(this.titleURI, "invalid"))
+		when(this.gameRepo.findByTitleURIAndAnimalName(this.titleURI, "invalid"))
 				.thenThrow(NoSuchElementException.class);
 
 		assertThrows(NoSuchElementException.class, () -> this.gameService.getAnimal(this.titleURI, "invalid"));
 
-		verify(this.gameRepo).findByTitleURIAndAnimals_Name(this.titleURI, "invalid");
+		verify(this.gameRepo).findByTitleURIAndAnimalName(this.titleURI, "invalid");
 	}
 
 	/**
@@ -223,19 +236,18 @@ class GameServiceImplTest {
 	 * {@code findByTitleURIAndAnimals_NameAndAnimals_Actions_Name} method was
 	 * called and asserts that the returned {@link Game} object matches what is
 	 * expected.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	void getActionTest_GameExists() throws Exception {
 
-		when(this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
-				this.actionName)).thenReturn(Optional.of(game));
+		when(this.gameRepo.findByTitleURIAndAnimalNameAndActionName(this.titleURI, this.animalName, this.actionName))
+				.thenReturn(Optional.of(action));
 
 		Action returned = this.gameService.getAction(this.titleURI, this.animalName, this.actionName);
 
-		verify(this.gameRepo).findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
-				this.actionName);
+		verify(this.gameRepo).findByTitleURIAndAnimalNameAndActionName(this.titleURI, this.animalName, this.actionName);
 
 		assertEquals(this.action, returned);
 	}
@@ -249,19 +261,18 @@ class GameServiceImplTest {
 	 * Test verifies that the mocked {@link GameRepo}
 	 * {@code findByTitleURIAndAnimals_NameAndAnimals_Actions_Name} method was
 	 * called and asserts that a {@link NoSuchElementException} was thrown.
-	 * 
+	 *
 	 * @throws Exception
 	 */
 	@Test
 	void getActionTest_GameDoesNotExists() throws Exception {
 
-		when(this.gameRepo.findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
-				"invalid")).thenThrow(NoSuchElementException.class);
+		when(this.gameRepo.findByTitleURIAndAnimalNameAndActionName(this.titleURI, this.animalName, "invalid"))
+				.thenThrow(NoSuchElementException.class);
 
 		assertThrows(NoSuchElementException.class,
 				() -> this.gameService.getAction(this.titleURI, this.animalName, "invalid"));
 
-		verify(this.gameRepo).findByTitleURIAndAnimals_NameAndAnimals_Actions_Name(this.titleURI, this.animalName,
-				"invalid");
+		verify(this.gameRepo).findByTitleURIAndAnimalNameAndActionName(this.titleURI, this.animalName, "invalid");
 	}
 }
