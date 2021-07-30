@@ -92,9 +92,9 @@ class GameServiceImplTest {
 		this.actionName = "pet";
 		this.sourceURL = "http://test.url";
 
-		this.action = Action.builder().name(ActionName.builder().name(this.actionName).build()).canYou(true)
+		this.action = Action.builder().actionName(ActionName.builder().name(this.actionName).build()).canYou(true)
 				.source(Source.builder().url(this.sourceURL).build()).build();
-		this.animal = Animal.builder().name(AnimalName.builder().name(this.actionName).build())
+		this.animal = Animal.builder().animalName(AnimalName.builder().name(this.animalName).build())
 				.actions(Arrays.asList(this.action)).build();
 		this.game = Game.builder().title(this.title).titleURI(this.titleURI).animals(Arrays.asList(this.animal))
 				.build();

@@ -86,9 +86,9 @@ class GameRepoTest {
 		this.actionName = "pet";
 		this.sourceURL = "http://test.url";
 
-		this.action = Action.builder().name(ActionName.builder().name(this.actionName).build()).canYou(true)
+		this.action = Action.builder().actionName(ActionName.builder().name(this.actionName).build()).canYou(true)
 				.source(Source.builder().url(this.sourceURL).build()).build();
-		this.animal = Animal.builder().name(AnimalName.builder().name(this.actionName).build())
+		this.animal = Animal.builder().animalName(AnimalName.builder().name(this.animalName).build())
 				.actions(Arrays.asList(this.action)).build();
 		this.game = Game.builder().title(this.title).titleURI(this.titleURI).animals(Arrays.asList(this.animal))
 				.build();
@@ -132,10 +132,10 @@ class GameRepoTest {
 	@Test
 	void findByTitleURITest_EntityExists() throws Exception {
 
-		Game returned = Game.builder().build();
+		Game returned = new Game();
 
 		try {
-			returned = this.gameRepo.findByTitleURI(this.titleURI).orElseThrow(NoSuchElementException::new);
+			returned = this.gameRepo.findByTitleURI(this.titleURI) .orElseThrow(NoSuchElementException::new);
 
 		} catch (NoSuchElementException e) {
 			fail("A NoSuchElementException was thrown when no exception was expected to be thrown");
@@ -178,7 +178,7 @@ class GameRepoTest {
 	@Test
 	void findByTitleURIAndAnimalNameTest_EntityExists() throws Exception {
 
-		Animal returned = Animal.builder().build();
+		Animal returned = new Animal();
 
 		try {
 			returned = this.gameRepo.findByTitleURIAndAnimalName(this.titleURI, this.animalName)
@@ -226,7 +226,7 @@ class GameRepoTest {
 	@Test
 	void findByTitleURIAndAnimalNameAndActionNameTest_EntityExists() throws Exception {
 
-		Action returned = Action.builder().build();
+		Action returned = new Action();
 
 		try {
 			returned = this.gameRepo
