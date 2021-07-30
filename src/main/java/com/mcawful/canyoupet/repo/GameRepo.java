@@ -52,7 +52,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 *                   {@link Animal} object in the {@link Game} object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
-	@Query("SELECT an FROM Game g, Animal an, AnimalName ann WHERE g.titleURI = ?1 AND ann.name = ?2")
+	@Query("SELECT a FROM Game g JOIN g.animals a WHERE g.titleURI = ?1 AND a.animalName.name = ?2")
 	public Optional<Animal> findByTitleURIAndAnimalName(String titleURI, String animalName);
 
 	/**
@@ -70,7 +70,7 @@ public interface GameRepo extends JpaRepository<Game, Integer> {
 	 *                   {@link Game} object to find
 	 * @return an {@link Optional} of a {@link Game} object
 	 */
-	@Query("SELECT ac from Game g, AnimalName ann, Action ac, ActionName acn WHERE g.titleURI = ?1 AND ann.name = ?2 AND acn.name = ?3")
+	@Query("SELECT ac from Game g JOIN g.animals an JOIN an.actions ac WHERE g.titleURI = ?1 AND an.animalName.name = ?2 AND ac.actionName.name = ?3")
 	public Optional<Action> findByTitleURIAndAnimalNameAndActionName(String titleURI, String animalName,
 			String actionName);
 }
