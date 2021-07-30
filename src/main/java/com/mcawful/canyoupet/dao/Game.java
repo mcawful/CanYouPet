@@ -16,10 +16,11 @@ import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The DAO representing the {@code Game} entity.
@@ -27,10 +28,10 @@ import lombok.Setter;
  * @author Michael McAuliffe
  *
  */
+@Data
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class Game {
 

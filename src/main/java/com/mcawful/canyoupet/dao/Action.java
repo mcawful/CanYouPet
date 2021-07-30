@@ -14,10 +14,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The DOA representing the {@code Action} entity.
@@ -25,10 +26,10 @@ import lombok.Setter;
  * @author Michael McAuliffe
  *
  */
+@Data
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class Action {
 
@@ -46,7 +47,7 @@ public class Action {
 	 */
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "fk_action_name", nullable = false)
-	private ActionName name;
+	private ActionName actionName;
 
 	/**
 	 * Indicates if the {@code Action} can be done.
@@ -68,6 +69,6 @@ public class Action {
 	 */
 	public String getName() {
 
-		return this.name.getName();
+		return this.actionName.getName();
 	}
 }

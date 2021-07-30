@@ -17,10 +17,11 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.EqualsAndHashCode;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 /**
  * The DOA representing the {@code Animal} entity.
@@ -28,10 +29,10 @@ import lombok.Setter;
  * @author Michael McAuliffe
  *
  */
+@Data
 @Builder
-@Getter
-@Setter
-@EqualsAndHashCode
+@NoArgsConstructor
+@AllArgsConstructor(access = AccessLevel.PRIVATE)
 @Entity
 public class Animal {
 
@@ -49,7 +50,7 @@ public class Animal {
 	 */
 	@ManyToOne(cascade = CascadeType.ALL, optional = false)
 	@JoinColumn(name = "fk_animal_name", nullable = false)
-	private AnimalName name;
+	private AnimalName animalName;
 
 	/**
 	 * The {@link List} of {@link Action} objects that can be performed on the
@@ -66,6 +67,6 @@ public class Animal {
 	 */
 	public String getName() {
 
-		return this.name.getName();
+		return this.animalName.getName();
 	}
 }
